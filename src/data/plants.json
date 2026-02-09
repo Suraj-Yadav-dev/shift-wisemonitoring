@@ -1,0 +1,382 @@
+[
+  {
+    "plant": "SDL SIKRI",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VAPL SIKRI-2",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "SHANKAR FORGE",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },{
+    "plant": "RICO BAWAL",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "SUNBEAM TAPUKHERA",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "POLYPLASTIC-BHIWADI (RAJ)",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "BHUNIT PALWAL",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VICTORA DHATIR (JD)",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "SKH MANESAR PLANT 2",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VAPL BAWAL-1",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "MATJET",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "CUTTING EDGE DHATIR",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VICTORA BAWAL",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "BHAGWATI TECHNO",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "NIROTECH",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "SKH-1",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "SATA VIKAS",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "MT AUTOCRAFT ROHTAK",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "SUNBEAM BAWAL",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "KML",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "POLYPLASTIC-TAMIL NAIDU",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VAPL PRITHLA",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VAPL PATHREDI",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VAPL DHATIR B.O.P",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "VIBRO CAUSTIC",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "NOIDA GLOBAL",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "SKH-4",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  {
+    "plant": "PANCHKULA STEELS",
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  }
+]
