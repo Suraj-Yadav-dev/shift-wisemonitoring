@@ -6,7 +6,7 @@ import attendanceData from "../data/attendance.json";
 import KPISection from "../components/dashboard/KPISection";
 import AttendanceGrid from "../components/dashboard/AttendanceGrid";
 import Lottie from "lottie-react";
-import animationData from "../assets/steampunkmechanism.json";
+import animationData from "../assets/Steampunkmechanism.json";
 import kpLogo from "../assets/kp.jpg";
 
 // ---------------- Dashboard Content ----------------
