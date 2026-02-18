@@ -11,36 +11,23 @@ export default function KPISection() {
   let totalPresent = 0;
   let totalAbsent = 0;
 
-  // ---- Requirement (All Plants)
+  // ---- Requirement (All Plants) → IGNORE SHIFT
   requirementsData.forEach((plant) => {
-    if (selectedShift) {
-      const shift = plant.shifts?.find(
-        (s) => s.name === selectedShift
-      );
-      totalRequirement += shift?.requirement || 0;
-    } else {
-      totalRequirement += plant.totalRequirement || 0;
-    }
+    totalRequirement += plant.totalRequirement || 0;
   });
 
-  // ---- Attendance (All Plants)
+  // ---- Attendance (All Plants) → IGNORE SHIFT, ONLY FILTER MONTH
   attendanceData.forEach((plant) => {
     plant.shifts.forEach((shift) => {
-      const shiftMatch =
-        !selectedShift || shift.name === selectedShift;
-
       const monthMatch =
         !selectedMonth || shift.month === selectedMonth;
 
-      if (shiftMatch && monthMatch) {
-        const present =
+      if (monthMatch) {
+        totalPresent +=
           shift.attendance?.filter((a) => a === 1).length || 0;
 
-        const absent =
+        totalAbsent +=
           shift.attendance?.filter((a) => a === 0).length || 0;
-
-        totalPresent += present;
-        totalAbsent += absent;
       }
     });
   });
@@ -61,6 +48,7 @@ export default function KPISection() {
       (p) => p.plant === selectedPlant
     );
 
+    // ---- Plant Requirement → SHIFT FILTER APPLIED
     if (reqPlant) {
       if (selectedShift) {
         const shift = reqPlant.shifts?.find(
@@ -76,6 +64,7 @@ export default function KPISection() {
       (p) => p.plant === selectedPlant
     );
 
+    // ---- Plant Attendance → SHIFT + MONTH FILTER APPLIED
     if (attPlant) {
       attPlant.shifts.forEach((shift) => {
         const shiftMatch =
@@ -105,7 +94,7 @@ export default function KPISection() {
   return (
     <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-6">
 
-      {/* -------- OVERALL -------- */}
+      {/* -------- OVERALL (CONSTANT) -------- */}
 
       <div className="bg-white p-4 rounded-xl shadow text-center">
         <h3 className="text-gray-500 text-sm">
@@ -134,7 +123,7 @@ export default function KPISection() {
         </p>
       </div>
 
-      {/* -------- INDIVIDUAL PLANT -------- */}
+      {/* -------- INDIVIDUAL PLANT (DYNAMIC) -------- */}
 
       <div className="bg-blue-50 p-4 rounded-xl shadow text-center">
         <h3 className="text-gray-600 text-sm">

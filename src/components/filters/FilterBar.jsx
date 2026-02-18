@@ -76,20 +76,7 @@ export default function FilterBar() {
         ))}
       </select>
 
-      {/* Month Dropdown */}
-      <select
-        className="border p-2 rounded w-40"
-        value={selectedMonth}
-        onChange={(e) => setSelectedMonth(e.target.value)}
-        disabled={!selectedPlant}
-      >
-        <option value="">Select Month</option>
-        {months.map((month) => (
-          <option key={month} value={month}>
-            {month}
-          </option>
-        ))}
-      </select>
+      
     </div>
   );
 }
