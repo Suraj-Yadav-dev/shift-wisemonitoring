@@ -12,9 +12,10 @@
       { "name": "S1", "requirement": 0 },
       { "name": "S2", "requirement": 0 }
     ]
+
   },
   {
-    "plant": "VAPL SIKRI-2",
+    "plant": "VAPL SIKRI-2(Phantom)",
     "totalRequirement": 10,
     "shifts": [
       { "name": "SPL A", "requirement": 5 },
