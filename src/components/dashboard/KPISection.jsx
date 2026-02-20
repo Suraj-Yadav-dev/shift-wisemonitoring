@@ -62,18 +62,25 @@ export default function KPISection() {
 
   const absentPlant = Math.max(required - deployed, 0);
 
-  // ================= ALL PLANTS (REMAINS CONSTANT) =================
+  // ================= ALL PLANTS (NOW RESPONDS TO SHIFT FILTER) =================
   let totalRequirementAllPlants = 0;
   let totalPresentAllPlants = 0;
 
   requirementsData.forEach((plant) => {
-    totalRequirementAllPlants += plant.totalRequirement || 0;
+    if (selectedShift) {
+      const shiftReq = plant.shifts?.find((s) => s.name === selectedShift);
+      totalRequirementAllPlants += shiftReq?.requirement || 0;
+    } else {
+      totalRequirementAllPlants += plant.totalRequirement || 0;
+    }
   });
 
   attendanceData.forEach((plant) => {
-    plant.shifts.forEach((shift) => {
+    plant.shifts?.forEach((shift) => {
+      const shiftMatch = !selectedShift || shift.name === selectedShift;
       const monthMatch = !selectedMonth || shift.month === selectedMonth;
-      if (monthMatch) {
+      
+      if (monthMatch && shiftMatch) {
         totalPresentAllPlants +=
           shift.attendance?.filter((a) => a === 1).length || 0;
       }
@@ -122,51 +129,54 @@ export default function KPISection() {
   return (
     <div className="space-y-12">
       
-      {/* ===== MAIN KPIs ===== */}
-      <div className="space-y-6">
-        <div className="flex flex-col mb-4">
-          <h2 className="text-2xl font-extrabold text-gray-800 tracking-tight">General Overview</h2>
-          <p className="text-sm text-gray-500">Showing requirements and attendance metrics across plants.</p>
+      {/* ===== TOP KPIs: ALL PLANTS ===== */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-blue-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
+          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Req. (All Plants)</h3>
+          <p className="text-4xl font-black text-gray-800">{totalRequirementAllPlants}</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* ---------- PLANT WISE ---------- */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Required</h3>
-            <p className="text-4xl font-black text-gray-800">{required}</p>
-          </div>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-emerald-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
+          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Present (All Plants)</h3>
+          <p className="text-4xl font-black text-emerald-500">
+            {totalPresentAllPlants}
+          </p>
+        </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Present</h3>
-            <p className="text-4xl font-black text-emerald-500">{deployed}</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Absent</h3>
-            <p className="text-4xl font-black text-rose-500">{absentPlant}</p>
-          </div>
-
-          {/* ---------- ALL PLANTS (CONSTANT) ---------- */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-blue-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Req. (All Plants)</h3>
-            <p className="text-4xl font-black text-gray-800">{totalRequirementAllPlants}</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-emerald-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Present (All Plants)</h3>
-            <p className="text-4xl font-black text-emerald-500">
-              {totalPresentAllPlants}
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-rose-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Absent (All Plants)</h3>
-            <p className="text-4xl font-black text-rose-500">
-              {totalAbsentAllPlants}
-            </p>
-          </div>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-rose-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
+          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Absent (All Plants)</h3>
+          <p className="text-4xl font-black text-rose-500">
+            {totalAbsentAllPlants}
+          </p>
         </div>
       </div>
+
+      {/* ===== SPECIFIC PLANT KPIs (Only render if a specific plant is chosen) ===== */}
+      {selectedPlant && (
+        <div className="space-y-6">
+          <div className="flex flex-col mb-4">
+            <h2 className="text-2xl font-extrabold text-gray-800 tracking-tight">Plant Overview: {selectedPlant}</h2>
+            <p className="text-sm text-gray-500">Showing requirements and attendance metrics for the selected plant.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Required</h3>
+              <p className="text-4xl font-black text-gray-800">{required}</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Present</h3>
+              <p className="text-4xl font-black text-emerald-500">{deployed}</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Absent</h3>
+              <p className="text-4xl font-black text-rose-500">{absentPlant}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ===== MD TIME-SLOT VIEW ===== */}
       <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 bg-gradient-to-b from-gray-50 to-white">

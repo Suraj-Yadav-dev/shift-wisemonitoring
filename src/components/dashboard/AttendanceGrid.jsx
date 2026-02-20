@@ -7,61 +7,72 @@ import redMale from "../../assets/Redmale.png";
 export default function AttendanceGrid() {
   const { selectedPlant, selectedShift, selectedMonth } = useFilter();
 
-  // Find selected plant attendance
-  const plantAttendance = attendanceData.find(
-    (p) => p.plant === selectedPlant
-  );
+  // 1. Determine which plants to process
+  // If "All Plants" (empty string), we use the whole attendanceData array.
+  // If a specific plant is selected, we filter just for that one.
+  const targetPlants = selectedPlant
+    ? attendanceData.filter((p) => p.plant === selectedPlant)
+    : attendanceData;
 
-  // Fallback UI if no plant is selected
-  if (!plantAttendance) {
+  // 2. Collect all matching shifts across the target plants
+  const validShifts = [];
+
+  targetPlants.forEach((plant) => {
+    plant.shifts.forEach((shift) => {
+      // Filter by Shift Name (if selected)
+      if (selectedShift && shift.name !== selectedShift) return;
+
+      // Filter by Month (if selected)
+      if (selectedMonth && shift.month !== selectedMonth) return;
+
+      // Filter out empty attendance arrays
+      if (!shift.attendance || shift.attendance.length === 0) return;
+
+      // Add to our list, attaching the Plant Name so we can display it
+      validShifts.push({
+        ...shift,
+        plantName: plant.plant, // Important for "All Plants" view
+      });
+    });
+  });
+
+  // 3. Fallback UI if no data matches the filters
+  if (validShifts.length === 0) {
     return (
       <div className="text-center p-10 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
         <p className="text-gray-500 font-medium text-lg">
-          Please select a plant to view attendance records.
+          No attendance records found for the selected criteria.
         </p>
       </div>
     );
   }
 
-  // Determine shifts to display
-  const shiftsToShow = selectedShift
-    ? plantAttendance.shifts.filter((s) => s.name === selectedShift)
-    : plantAttendance.shifts;
-
-  // Fallback UI if no shifts match
-  if (!shiftsToShow.length) {
-    return (
-      <div className="text-center p-10 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
-        <p className="text-gray-500 font-medium text-lg">
-          No shifts available for the selected criteria.
-        </p>
-      </div>
-    );
-  }
-
+  // 4. Render the Grids
   return (
-    <div className="space-y-6">
-      {shiftsToShow.map((shift) => {
-        // Skip if month filter doesn't match
-        if (selectedMonth && shift.month !== selectedMonth) return null;
-
-        const attendance = shift.attendance || [];
-        
-        // Hide shifts entirely if they have empty attendance arrays
-        if (attendance.length === 0) return null;
+    <div className="space-y-8">
+      {validShifts.map((shift, index) => {
+        // Create a unique key using plant + shift + month + index
+        const uniqueKey = `${shift.plantName}-${shift.name}-${shift.month}-${index}`;
 
         return (
           <div
-            key={shift.name}
+            key={uniqueKey}
             className="bg-white p-5 sm:p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
           >
             {/* --- SHIFT HEADER --- */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-gray-50 gap-3">
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Plant Name Badge (Visible in All Plants view) */}
+                <span className="bg-gray-800 text-white px-3 py-1 rounded-lg font-bold text-sm tracking-wide shadow-sm">
+                  {shift.plantName}
+                </span>
+
+                {/* Shift Name Badge */}
                 <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg font-bold text-sm tracking-wide border border-blue-200 shadow-sm">
                   {shift.name}
                 </span>
-                <h3 className="text-lg font-extrabold text-gray-800 tracking-tight">
+
+                <h3 className="text-lg font-extrabold text-gray-800 tracking-tight hidden sm:block">
                   Attendance Roster
                 </h3>
               </div>
@@ -74,23 +85,21 @@ export default function AttendanceGrid() {
             </div>
 
             {/* --- ATTENDANCE GRID --- */}
-            {/* Added grid-cols-5 for mobile, scaling up to 12 for desktop */}
             <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-10 lg:grid-cols-12 gap-3 sm:gap-5">
-              {attendance.map((day, index) => (
+              {shift.attendance.map((day, dayIndex) => (
                 <div
-                  key={index}
+                  key={dayIndex}
                   className="group flex flex-col items-center justify-center p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-default"
                 >
                   <div className="relative">
                     <img
                       src={day === 1 ? greenMale : redMale}
                       alt={day === 1 ? "Present" : "Absent"}
-                      // Scaled down slightly for mobile, larger on sm+
                       className="h-8 w-8 sm:h-10 sm:w-10 object-contain group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 drop-shadow-sm"
                     />
                   </div>
                   <span className="text-[10px] sm:text-xs mt-2 font-bold text-gray-400 group-hover:text-gray-700 transition-colors">
-                    Day {index + 1}
+                    Day {dayIndex + 1}
                   </span>
                 </div>
               ))}
@@ -110,10 +119,9 @@ export default function AttendanceGrid() {
               </div>
 
               <div className="text-sm text-gray-400 font-medium">
-                Total Logs: <span className="text-gray-600 font-bold">{attendance.length}</span>
+                Total Logs: <span className="text-gray-600 font-bold">{shift.attendance.length}</span>
               </div>
             </div>
-            
           </div>
         );
       })}

@@ -380,9 +380,9 @@
   },
   {
     "plant": "PANCHKULA STEEL",
-    "totalRequirement": 5,
+    "totalRequirement": 6,
     "shifts": [
-      { "name": "SPL A", "requirement": 0 },
+      { "name": "SPL A", "requirement": 6 },
       { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },

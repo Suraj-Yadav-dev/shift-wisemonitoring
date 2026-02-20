@@ -12,9 +12,22 @@ export default function FilterBar() {
     setSelectedMonth,
   } = useFilter();
 
-  // Get selected plant object to populate shifts
-  const plantRecord = plantsData.find((p) => p.plant === selectedPlant);
-  const shifts = plantRecord ? plantRecord.shifts : [];
+  // Dynamically get shifts (Specific to plant, or ALL unique shifts if "All Plants" is selected)
+  let shifts = [];
+  if (selectedPlant) {
+    const plantRecord = plantsData.find((p) => p.plant === selectedPlant);
+    shifts = plantRecord ? plantRecord.shifts : [];
+  } else {
+    const shiftMap = new Map();
+    plantsData.forEach((plant) => {
+      plant.shifts?.forEach((shift) => {
+        if (!shiftMap.has(shift.name)) {
+          shiftMap.set(shift.name, shift);
+        }
+      });
+    });
+    shifts = Array.from(shiftMap.values());
+  }
 
   // Dynamically get months for selected plant & shift
   let months = [];
@@ -50,7 +63,7 @@ export default function FilterBar() {
           setSelectedMonth(""); // Reset month when plant changes
         }}
       >
-        <option value="">Select Plant</option>
+        <option value="">All Plants</option>
         {plantsData.map((plant) => (
           <option key={plant.plant} value={plant.plant}>
             {plant.plant}
@@ -66,17 +79,16 @@ export default function FilterBar() {
           setSelectedShift(e.target.value);
           setSelectedMonth(""); // Reset month when shift changes
         }}
-        disabled={!selectedPlant}
+        // Removed the disabled property so it works for All Plants!
       >
         <option value="">All Shifts</option>
         {shifts.map((shift) => (
           <option key={shift.name} value={shift.name}>
-            {shift.name} ({shift.time})
+            {shift.name} {shift.time ? `(${shift.time})` : ""}
           </option>
         ))}
       </select>
 
-      
     </div>
   );
 }
