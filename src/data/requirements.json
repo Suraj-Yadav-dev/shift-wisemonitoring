@@ -15,7 +15,7 @@
 
   },
   {
-    "plant": "VAPL SIKRI-2(Phantom)",
+    "plant": "VAPL SIKRI-2",
     "totalRequirement": 10,
     "shifts": [
       { "name": "SPL A", "requirement": 5 },
@@ -183,7 +183,7 @@
     ]
   },
   {
-    "plant": "BAHGWATI TECHNO",
+    "plant": "BHAGWATI TECHNO",
     "totalRequirement":12,
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
