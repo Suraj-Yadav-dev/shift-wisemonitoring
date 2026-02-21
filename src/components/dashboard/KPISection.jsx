@@ -5,8 +5,7 @@ import requirementsData from "../../data/requirements.json";
 
 // Map shift names to their exact start times based on your data
 const SHIFT_START_TIMES = {
-  "A": "6:00 AM",
-  "S1": "6:00 AM",
+
   "SPL A": "8:30 AM",
   "SPL B": "8:30 AM",
   "G": "9:30 AM",
