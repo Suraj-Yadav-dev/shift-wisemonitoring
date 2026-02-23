@@ -1,7 +1,7 @@
 [
   {
     "plant": "SDL SIKRI",
-   "totalRequirement":  70,
+   "totalRequirement":  60,
     "shifts": [
       { "name": "SPL A", "requirement": 30 },
       { "name": "SPL B", "requirement": 30},

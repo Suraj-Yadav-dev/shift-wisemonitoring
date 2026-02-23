@@ -12,11 +12,10 @@ export default function DayNightMonitoring() {
 
   // ================= 1. ACTIVE SHIFTS LOGIC FOR SELECTED PLANT =================
   const activeShiftsInfo = useMemo(() => {
-    if (!selectedPlant) return { morning: [], evening: [] };
+    if (!selectedPlant || selectedPlant === "All") return { morning: [], evening: [] };
 
     const activeSet = new Set();
 
-    // Check requirements
     const plantReq = requirementsData.find(p => p.plant === selectedPlant);
     if (plantReq) {
       plantReq.shifts?.forEach(s => {
@@ -24,7 +23,6 @@ export default function DayNightMonitoring() {
       });
     }
 
-    // Check attendance
     const plantAtt = attendanceData.find(p => p.plant === selectedPlant);
     if (plantAtt) {
       plantAtt.shifts?.forEach(s => {
@@ -40,26 +38,32 @@ export default function DayNightMonitoring() {
     };
   }, [selectedPlant]);
 
-  // ================= 2. CALCULATION LOGIC (Updated with Shift Details) =================
+  // ================= 2. CALCULATION LOGIC =================
   const stats = useMemo(() => {
     let morningReq = 0, morningPres = 0;
     let eveningReq = 0, eveningPres = 0;
+    
+    // 🚨 Explicitly track the "totalRequirement" field from JSON
+    let exactOverallRequirement = 0; 
 
-    // Initialize individual shift trackers
     const shiftDetails = {};
     [...MORNING_SHIFTS, ...EVENING_SHIFTS].forEach(s => {
       shiftDetails[s] = { name: s, req: 0, pres: 0 };
     });
 
-    // Calculate Requirements
+    // --- Calculate Requirements ---
     requirementsData.forEach((plant) => {
-      if (selectedPlant && plant.plant !== selectedPlant) return;
+      // Safe filter check (handles if state is "All" or empty string "")
+      if (selectedPlant && selectedPlant !== "All" && plant.plant !== selectedPlant) return;
 
+      // 🚨 ADD DIRECTLY FROM JSON FIELD (This creates your 411 total)
+      exactOverallRequirement += plant.totalRequirement || 0;
+
+      // Still calculate individual shifts for the breakdown cards
       plant.shifts?.forEach((shiftReq) => {
         if (shiftDetails[shiftReq.name]) {
           shiftDetails[shiftReq.name].req += shiftReq.requirement || 0;
         }
-
         if (MORNING_SHIFTS.includes(shiftReq.name)) {
           morningReq += shiftReq.requirement || 0;
         } else if (EVENING_SHIFTS.includes(shiftReq.name)) {
@@ -68,12 +72,12 @@ export default function DayNightMonitoring() {
       });
     });
 
-    // Calculate Attendance (Present)
+    // --- Calculate Attendance ---
     attendanceData.forEach((plant) => {
-      if (selectedPlant && plant.plant !== selectedPlant) return;
+      if (selectedPlant && selectedPlant !== "All" && plant.plant !== selectedPlant) return;
 
       plant.shifts?.forEach((shiftAtt) => {
-        const monthMatch = !selectedMonth || shiftAtt.month === selectedMonth;
+        const monthMatch = !selectedMonth || selectedMonth === "All" || shiftAtt.month === selectedMonth;
 
         if (monthMatch) {
           const presentCount = shiftAtt.attendance?.filter((a) => a === 1).length || 0;
@@ -81,7 +85,6 @@ export default function DayNightMonitoring() {
           if (shiftDetails[shiftAtt.name]) {
             shiftDetails[shiftAtt.name].pres += presentCount;
           }
-          
           if (MORNING_SHIFTS.includes(shiftAtt.name)) {
             morningPres += presentCount;
           } else if (EVENING_SHIFTS.includes(shiftAtt.name)) {
@@ -91,7 +94,7 @@ export default function DayNightMonitoring() {
       });
     });
 
-    // Sub-totals (Morning & Evening)
+    // Sub-totals
     const morningAbs = Math.max(morningReq - morningPres, 0);
     const eveningAbs = Math.max(eveningReq - eveningPres, 0);
 
@@ -101,7 +104,6 @@ export default function DayNightMonitoring() {
     const eveningPresPct = eveningReq > 0 ? ((eveningPres / eveningReq) * 100).toFixed(1) : 0;
     const eveningAbsPct = eveningReq > 0 ? ((eveningAbs / eveningReq) * 100).toFixed(1) : 0;
 
-    // Format individual shift arrays for the UI
     const formatShiftData = (name) => {
       const data = shiftDetails[name];
       const abs = Math.max(data.req - data.pres, 0);
@@ -109,12 +111,12 @@ export default function DayNightMonitoring() {
       return { ...data, abs, presPct };
     };
 
-    // Only keep shifts that actually have a requirement or attendance
     const morningDetails = MORNING_SHIFTS.map(formatShiftData).filter(s => s.req > 0 || s.pres > 0);
     const eveningDetails = EVENING_SHIFTS.map(formatShiftData).filter(s => s.req > 0 || s.pres > 0);
 
-    // OVERALL TOTALS
-    const totalReq = morningReq + eveningReq;
+    // --- OVERALL TOTALS ---
+    // Override the total with your exact JSON value
+    const totalReq = exactOverallRequirement; 
     const totalPres = morningPres + eveningPres;
     const totalAbs = Math.max(totalReq - totalPres, 0);
     
@@ -141,7 +143,7 @@ export default function DayNightMonitoring() {
             <span className="text-3xl">🌍</span> Overall Summary (All Shifts)
           </h2>
           <p className="text-blue-700/80 text-sm mt-1 font-medium">
-            {selectedPlant 
+            {selectedPlant && selectedPlant !== "All"
               ? `Total Day & Night combined metrics for ${selectedPlant}` 
               : "Total Day & Night combined metrics across ALL plants"}
           </p>
@@ -150,6 +152,7 @@ export default function DayNightMonitoring() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-blue-500">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Total Requirement</h3>
+            {/* 🚨 This now outputs the exact sum of your JSON's "totalRequirement" field */}
             <p className="text-4xl font-black text-gray-800">{stats.overall.req}</p>
           </div>
 
@@ -183,7 +186,7 @@ export default function DayNightMonitoring() {
             </p>
           </div>
 
-          {selectedPlant && (
+          {selectedPlant && selectedPlant !== "All" && (
             <div className="flex flex-wrap items-center gap-2 bg-amber-100/50 px-4 py-2 rounded-xl border border-amber-200">
               <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Active Now:</span>
               {activeShiftsInfo.morning.length > 0 ? (
@@ -260,7 +263,7 @@ export default function DayNightMonitoring() {
             </p>
           </div>
 
-          {selectedPlant && (
+          {selectedPlant && selectedPlant !== "All" && (
             <div className="flex flex-wrap items-center gap-2 bg-indigo-800/80 px-4 py-2 rounded-xl border border-indigo-700">
               <span className="text-xs font-bold text-indigo-300 uppercase tracking-wider">Active Now:</span>
               {activeShiftsInfo.evening.length > 0 ? (
