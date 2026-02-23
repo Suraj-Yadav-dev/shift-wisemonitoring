@@ -118,12 +118,12 @@
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 9 },
-      { "name": "B", "requirement": 9 },
+      { "name": "A", "requirement":  0},
+      { "name": "B", "requirement":  0},
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
+      { "name": "S1", "requirement": 9 },
+      { "name": "S2", "requirement": 9 }
     ]
   },
   {
@@ -216,12 +216,12 @@
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 2 },
-      { "name": "B", "requirement": 2 },
+      { "name": "A", "requirement":  0},
+      { "name": "B", "requirement":  0},
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
+      { "name": "S1", "requirement": 2 },
+      { "name": "S2", "requirement": 2 }
     ]
   },
   {
@@ -272,11 +272,11 @@
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
+      { "name": "A", "requirement": 25 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 25 },
+      { "name": "S1", "requirement": 0 },
       { "name": "S2", "requirement": 11 }
     ]
   },
@@ -312,14 +312,14 @@
     "plant": "VAPL PATHREDI",
     "totalRequirement": 60,
     "shifts": [
-      { "name": "SPL A", "requirement": 30 },
-      { "name": "SPL B", "requirement": 30 },
+      { "name": "SPL A", "requirement": 0 },
+      { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
+      { "name": "S1", "requirement": 30 },
+      { "name": "S2", "requirement": 30 }
     ]
   },
   {
