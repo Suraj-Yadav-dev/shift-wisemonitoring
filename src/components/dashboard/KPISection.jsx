@@ -8,22 +8,49 @@ const MORNING_SHIFTS = ["SPL A", "SPL B", "A", "G", "S1"];
 const EVENING_SHIFTS = ["B", "C", "S2"];
 
 export default function DayNightMonitoring() {
-  // 🚀 FIX 1: Yahan se selectedShift hata diya hai
   const { selectedPlant, selectedMonth } = useFilter();
 
-  // ================= CALCULATION LOGIC =================
+  // ================= 1. ACTIVE SHIFTS LOGIC FOR SELECTED PLANT =================
+  const activeShiftsInfo = useMemo(() => {
+    if (!selectedPlant) return { morning: [], evening: [] };
+
+    const activeSet = new Set();
+
+    // Check requirements: Agar requirement 0 se zyada hai, toh shift active hai
+    const plantReq = requirementsData.find(p => p.plant === selectedPlant);
+    if (plantReq) {
+      plantReq.shifts?.forEach(s => {
+        if (s.requirement > 0) activeSet.add(s.name);
+      });
+    }
+
+    // Check attendance: Agar koi present hai, toh shift active hai
+    const plantAtt = attendanceData.find(p => p.plant === selectedPlant);
+    if (plantAtt) {
+      plantAtt.shifts?.forEach(s => {
+        if (s.attendance && s.attendance.length > 0) activeSet.add(s.name);
+      });
+    }
+
+    const activeArray = Array.from(activeSet);
+    
+    // Morning aur Evening active shifts ko alag-alag filter karna
+    return {
+      morning: activeArray.filter(s => MORNING_SHIFTS.includes(s)),
+      evening: activeArray.filter(s => EVENING_SHIFTS.includes(s))
+    };
+  }, [selectedPlant]);
+
+  // ================= 2. CALCULATION LOGIC =================
   const stats = useMemo(() => {
     let morningReq = 0, morningPres = 0;
     let eveningReq = 0, eveningPres = 0;
 
-    // 1. Calculate Requirements
+    // Calculate Requirements
     requirementsData.forEach((plant) => {
-      // Global Plant Filter Check
       if (selectedPlant && plant.plant !== selectedPlant) return;
 
       plant.shifts?.forEach((shiftReq) => {
-        // 🚀 FIX 2: selectedShift wala return check hata diya hai
-
         if (MORNING_SHIFTS.includes(shiftReq.name)) {
           morningReq += shiftReq.requirement || 0;
         } else if (EVENING_SHIFTS.includes(shiftReq.name)) {
@@ -32,13 +59,11 @@ export default function DayNightMonitoring() {
       });
     });
 
-    // 2. Calculate Attendance (Present)
+    // Calculate Attendance (Present)
     attendanceData.forEach((plant) => {
       if (selectedPlant && plant.plant !== selectedPlant) return;
 
       plant.shifts?.forEach((shiftAtt) => {
-        // 🚀 FIX 3: selectedShift wala return check yahan se bhi hata diya hai
-        
         const monthMatch = !selectedMonth || shiftAtt.month === selectedMonth;
 
         if (monthMatch) {
@@ -53,7 +78,7 @@ export default function DayNightMonitoring() {
       });
     });
 
-    // 3. Calculate Absents & Percentages
+    // Calculate Absents & Percentages
     const morningAbs = Math.max(morningReq - morningPres, 0);
     const eveningAbs = Math.max(eveningReq - eveningPres, 0);
 
@@ -67,7 +92,6 @@ export default function DayNightMonitoring() {
       morning: { req: morningReq, pres: morningPres, abs: morningAbs, presPct: morningPresPct, absPct: morningAbsPct },
       evening: { req: eveningReq, pres: eveningPres, abs: eveningAbs, presPct: eveningPresPct, absPct: eveningAbsPct }
     };
-  // 🚀 FIX 4: Dependency array se selectedShift hata diya hai
   }, [selectedPlant, selectedMonth]); 
 
   // ================= UI RENDER =================
@@ -75,14 +99,32 @@ export default function DayNightMonitoring() {
     <div className="space-y-12">
       
       {/* ===== ☀️ MORNING SHIFTS SECTION ===== */}
-      <div className="bg-amber-50/50 p-6 sm:p-8 rounded-3xl border border-amber-100 shadow-sm">
-        <div className="mb-6">
-          <h2 className="text-2xl font-extrabold text-amber-900 flex items-center gap-3">
-            <span className="text-3xl">☀️</span> Morning Shifts Overview
-          </h2>
-          <p className="text-amber-700/80 text-sm mt-1 font-medium">
-            Includes shifts starting between 6:00 AM to 9:30 AM (SPL A, SPL B, A, G, S1)
-          </p>
+      <div className="bg-amber-50/50 p-6 sm:p-8 rounded-3xl border border-amber-100 shadow-sm transition-all hover:shadow-md">
+        <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 className="text-2xl font-extrabold text-amber-900 flex items-center gap-3">
+              <span className="text-3xl">☀️</span> Morning Shifts Overview
+            </h2>
+            <p className="text-amber-700/80 text-sm mt-1 font-medium">
+              Includes shifts starting between 6:00 AM to 9:30 AM
+            </p>
+          </div>
+
+          {/* DYNAMIC MORNING BADGES */}
+          {selectedPlant && (
+            <div className="flex flex-wrap items-center gap-2 bg-amber-100/50 px-4 py-2 rounded-xl border border-amber-200">
+              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Active Now:</span>
+              {activeShiftsInfo.morning.length > 0 ? (
+                activeShiftsInfo.morning.map(shift => (
+                  <span key={shift} className="bg-amber-400 text-amber-950 px-3 py-1 rounded-md text-xs font-black shadow-sm">
+                    {shift}
+                  </span>
+                ))
+              ) : (
+                <span className="text-xs italic text-amber-600">None</span>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -110,14 +152,32 @@ export default function DayNightMonitoring() {
       </div>
 
       {/* ===== 🌙 EVENING & NIGHT SHIFTS SECTION ===== */}
-      <div className="bg-indigo-900 p-6 sm:p-8 rounded-3xl border border-indigo-800 shadow-lg text-white">
-        <div className="mb-6">
-          <h2 className="text-2xl font-extrabold text-indigo-100 flex items-center gap-3">
-            <span className="text-3xl">🌙</span> Evening & Night Shifts Overview
-          </h2>
-          <p className="text-indigo-300 text-sm mt-1 font-medium">
-            Includes shifts starting between 2:30 PM to 11:00 PM (B, C, S2)
-          </p>
+      <div className="bg-indigo-900 p-6 sm:p-8 rounded-3xl border border-indigo-800 shadow-lg text-white transition-all hover:shadow-xl">
+        <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 className="text-2xl font-extrabold text-indigo-100 flex items-center gap-3">
+              <span className="text-3xl">🌙</span> Evening & Night Shifts Overview
+            </h2>
+            <p className="text-indigo-300 text-sm mt-1 font-medium">
+              Includes shifts starting between 2:30 PM to 11:00 PM
+            </p>
+          </div>
+
+          {/* DYNAMIC EVENING BADGES */}
+          {selectedPlant && (
+            <div className="flex flex-wrap items-center gap-2 bg-indigo-800/80 px-4 py-2 rounded-xl border border-indigo-700">
+              <span className="text-xs font-bold text-indigo-300 uppercase tracking-wider">Active Now:</span>
+              {activeShiftsInfo.evening.length > 0 ? (
+                activeShiftsInfo.evening.map(shift => (
+                  <span key={shift} className="bg-indigo-500 text-white px-3 py-1 rounded-md text-xs font-black shadow-sm">
+                    {shift}
+                  </span>
+                ))
+              ) : (
+                <span className="text-xs italic text-indigo-400">None</span>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
