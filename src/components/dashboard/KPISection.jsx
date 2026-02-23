@@ -1,242 +1,144 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import { useFilter } from "../../context/FilterContext";
 import attendanceData from "../../data/attendance.json";
 import requirementsData from "../../data/requirements.json";
 
-// Map shift names to their exact start times based on your data
-const SHIFT_START_TIMES = {
+// Shift Categorization
+const MORNING_SHIFTS = ["SPL A", "SPL B", "A", "G", "S1"];
+const EVENING_SHIFTS = ["B", "C", "S2"];
 
-  "SPL A": "8:30 AM",
-  "SPL B": "8:30 AM",
-  "G": "9:30 AM",
-  "B": "2:30 PM",
-  "S2": "6:00 PM",
-  "C": "11:00 PM",
-};
-
-// Get a list of unique start times for the dropdown/buttons
-const START_TIMES = [...new Set(Object.values(SHIFT_START_TIMES))];
-
-export default function KPISection() {
+export default function DayNightMonitoring() {
   const { selectedPlant, selectedMonth, selectedShift } = useFilter();
 
-  // MD View State: Default to the first available start time
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("8:30 AM");
+  // ================= CALCULATION LOGIC =================
+  const stats = useMemo(() => {
+    let morningReq = 0, morningPres = 0;
+    let eveningReq = 0, eveningPres = 0;
 
-  // ================= PLANT-WISE (CHANGES WITH SHIFT) =================
-  let required = 0;
-  let deployed = 0;
-
-  if (selectedPlant) {
-    const plantRequirement = requirementsData.find(
-      (p) => p.plant === selectedPlant
-    );
-
-    if (plantRequirement) {
-      if (selectedShift) {
-        const shiftRequirement = plantRequirement.shifts?.find(
-          (s) => s.name === selectedShift
-        );
-        required = shiftRequirement?.requirement || 0;
-      } else {
-        required = plantRequirement.totalRequirement || 0;
-      }
-    }
-
-    const plantAttendance = attendanceData.find(
-      (p) => p.plant === selectedPlant
-    );
-
-    if (plantAttendance) {
-      plantAttendance.shifts.forEach((shift) => {
-        const shiftMatch = !selectedShift || shift.name === selectedShift;
-        const monthMatch = !selectedMonth || shift.month === selectedMonth;
-
-        if (shiftMatch && monthMatch) {
-          deployed += shift.attendance?.filter((a) => a === 1).length || 0;
-        }
-      });
-    }
-  }
-
-  const absentPlant = Math.max(required - deployed, 0);
-
-  // ================= ALL PLANTS (NOW RESPONDS TO SHIFT FILTER) =================
-  let totalRequirementAllPlants = 0;
-  let totalPresentAllPlants = 0;
-
-  requirementsData.forEach((plant) => {
-    if (selectedShift) {
-      const shiftReq = plant.shifts?.find((s) => s.name === selectedShift);
-      totalRequirementAllPlants += shiftReq?.requirement || 0;
-    } else {
-      totalRequirementAllPlants += plant.totalRequirement || 0;
-    }
-  });
-
-  attendanceData.forEach((plant) => {
-    plant.shifts?.forEach((shift) => {
-      const shiftMatch = !selectedShift || shift.name === selectedShift;
-      const monthMatch = !selectedMonth || shift.month === selectedMonth;
-      
-      if (monthMatch && shiftMatch) {
-        totalPresentAllPlants +=
-          shift.attendance?.filter((a) => a === 1).length || 0;
-      }
-    });
-  });
-
-  const totalAbsentAllPlants = Math.max(
-    totalRequirementAllPlants - totalPresentAllPlants,
-    0
-  );
-
-  // ================= TIME-SLOT VIEW FOR MD =================
-  let timeSlotRequired = 0;
-  let timeSlotPresent = 0;
-  let matchingShifts = [];
-
-  if (selectedTimeSlot) {
-    matchingShifts = Object.keys(SHIFT_START_TIMES).filter(
-      (shiftName) => SHIFT_START_TIMES[shiftName] === selectedTimeSlot
-    );
-
+    // 1. Calculate Requirements
     requirementsData.forEach((plant) => {
+      // Global Plant Filter Check
+      if (selectedPlant && plant.plant !== selectedPlant) return;
+
       plant.shifts?.forEach((shiftReq) => {
-        if (matchingShifts.includes(shiftReq.name)) {
-          timeSlotRequired += shiftReq.requirement || 0;
+        // Global Shift Filter Check
+        if (selectedShift && shiftReq.name !== selectedShift) return;
+
+        if (MORNING_SHIFTS.includes(shiftReq.name)) {
+          morningReq += shiftReq.requirement || 0;
+        } else if (EVENING_SHIFTS.includes(shiftReq.name)) {
+          eveningReq += shiftReq.requirement || 0;
         }
       });
     });
 
+    // 2. Calculate Attendance (Present)
     attendanceData.forEach((plant) => {
+      if (selectedPlant && plant.plant !== selectedPlant) return;
+
       plant.shifts?.forEach((shiftAtt) => {
-        if (matchingShifts.includes(shiftAtt.name)) {
-          const monthMatch = !selectedMonth || shiftAtt.month === selectedMonth;
-          if (monthMatch) {
-            timeSlotPresent +=
-              shiftAtt.attendance?.filter((a) => a === 1).length || 0;
+        if (selectedShift && shiftAtt.name !== selectedShift) return;
+        
+        const monthMatch = !selectedMonth || shiftAtt.month === selectedMonth;
+
+        if (monthMatch) {
+          const presentCount = shiftAtt.attendance?.filter((a) => a === 1).length || 0;
+          
+          if (MORNING_SHIFTS.includes(shiftAtt.name)) {
+            morningPres += presentCount;
+          } else if (EVENING_SHIFTS.includes(shiftAtt.name)) {
+            eveningPres += presentCount;
           }
         }
       });
     });
-  }
 
-  const timeSlotAbsent = Math.max(timeSlotRequired - timeSlotPresent, 0);
+    // 3. Calculate Absents & Percentages
+    const morningAbs = Math.max(morningReq - morningPres, 0);
+    const eveningAbs = Math.max(eveningReq - eveningPres, 0);
 
-  // ================= UI =================
+    const morningPresPct = morningReq > 0 ? ((morningPres / morningReq) * 100).toFixed(1) : 0;
+    const morningAbsPct = morningReq > 0 ? ((morningAbs / morningReq) * 100).toFixed(1) : 0;
+
+    const eveningPresPct = eveningReq > 0 ? ((eveningPres / eveningReq) * 100).toFixed(1) : 0;
+    const eveningAbsPct = eveningReq > 0 ? ((eveningAbs / eveningReq) * 100).toFixed(1) : 0;
+
+    return {
+      morning: { req: morningReq, pres: morningPres, abs: morningAbs, presPct: morningPresPct, absPct: morningAbsPct },
+      evening: { req: eveningReq, pres: eveningPres, abs: eveningAbs, presPct: eveningPresPct, absPct: eveningAbsPct }
+    };
+  }, [selectedPlant, selectedMonth, selectedShift]);
+
+  // ================= UI RENDER =================
   return (
     <div className="space-y-12">
       
-      {/* ===== TOP KPIs: ALL PLANTS ===== */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-blue-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
-          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Req. (All Plants)</h3>
-          <p className="text-4xl font-black text-gray-800">{totalRequirementAllPlants}</p>
-        </div>
-
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-emerald-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
-          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Present (All Plants)</h3>
-          <p className="text-4xl font-black text-emerald-500">
-            {totalPresentAllPlants}
+      {/* ===== ☀️ MORNING SHIFTS SECTION ===== */}
+      <div className="bg-amber-50/50 p-6 sm:p-8 rounded-3xl border border-amber-100 shadow-sm">
+        <div className="mb-6">
+          <h2 className="text-2xl font-extrabold text-amber-900 flex items-center gap-3">
+            <span className="text-3xl">☀️</span> Morning Shifts Overview
+          </h2>
+          <p className="text-amber-700/80 text-sm mt-1 font-medium">
+            Includes shifts starting between 6:00 AM to 9:30 AM (SPL A, SPL B, A, G, S1)
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-b-4 border-b-rose-500 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
-          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-2">Total Absent (All Plants)</h3>
-          <p className="text-4xl font-black text-rose-500">
-            {totalAbsentAllPlants}
-          </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-amber-400">
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Morning Requirement</h3>
+            <p className="text-4xl font-black text-gray-800">{stats.morning.req}</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-emerald-500">
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Morning Present</h3>
+            <div className="flex items-baseline gap-2">
+              <p className="text-4xl font-black text-emerald-500">{stats.morning.pres}</p>
+              <span className="text-lg font-bold text-emerald-400">({stats.morning.presPct}%)</span>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-rose-500">
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Morning Shortage</h3>
+            <div className="flex items-baseline gap-2">
+              <p className="text-4xl font-black text-rose-500">{stats.morning.abs}</p>
+              <span className="text-lg font-bold text-rose-400">({stats.morning.absPct}%)</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ===== SPECIFIC PLANT KPIs (Only render if a specific plant is chosen) ===== */}
-      {selectedPlant && (
-        <div className="space-y-6">
-          <div className="flex flex-col mb-4">
-            <h2 className="text-2xl font-extrabold text-gray-800 tracking-tight">Plant Overview: {selectedPlant}</h2>
-            <p className="text-sm text-gray-500">Showing requirements and attendance metrics for the selected plant.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Required</h3>
-              <p className="text-4xl font-black text-gray-800">{required}</p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Present</h3>
-              <p className="text-4xl font-black text-emerald-500">{deployed}</p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Plant Absent</h3>
-              <p className="text-4xl font-black text-rose-500">{absentPlant}</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===== MD TIME-SLOT VIEW ===== */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 bg-gradient-to-b from-gray-50 to-white">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <div>
-            <h2 className="text-2xl font-extrabold text-gray-800 tracking-tight">
-              Shift Analysis by Start Time
-            </h2>
-            <p className="text-sm text-gray-500 mt-1">Management View: Track current active shifts.</p>
-          </div>
-          
-          {/* Time Slot Selector */}
-          <select
-            className="w-full md:w-auto p-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all cursor-pointer"
-            value={selectedTimeSlot}
-            onChange={(e) => setSelectedTimeSlot(e.target.value)}
-          >
-            {START_TIMES.map((time) => (
-              <option key={time} value={time}>
-                Shifts Starting at {time}
-              </option>
-            ))}
-          </select>
+      {/* ===== 🌙 EVENING & NIGHT SHIFTS SECTION ===== */}
+      <div className="bg-indigo-900 p-6 sm:p-8 rounded-3xl border border-indigo-800 shadow-lg text-white">
+        <div className="mb-6">
+          <h2 className="text-2xl font-extrabold text-indigo-100 flex items-center gap-3">
+            <span className="text-3xl">🌙</span> Evening & Night Shifts Overview
+          </h2>
+          <p className="text-indigo-300 text-sm mt-1 font-medium">
+            Includes shifts starting between 2:30 PM to 11:00 PM (B, C, S2)
+          </p>
         </div>
 
-        {/* --- SHIFT NAMES CHIPS --- */}
-        <div className="mb-8 p-4 bg-gray-50/50 rounded-2xl border border-gray-100 flex flex-col sm:flex-row sm:items-center gap-3">
-          <span className="text-sm text-gray-500 font-semibold uppercase tracking-wide">
-            Included Shifts:
-          </span>
-          <div className="flex flex-wrap items-center gap-2">
-            {matchingShifts.length > 0 ? (
-              matchingShifts.map((shiftName) => (
-                <span 
-                  key={shiftName} 
-                  className="px-4 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-bold border border-blue-200 shadow-sm"
-                >
-                  {shiftName}
-                </span>
-              ))
-            ) : (
-              <span className="text-sm text-gray-400 italic px-2">No shifts found for this time.</span>
-            )}
-          </div>
-        </div>
-
-        {/* KPIs */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-l-4 border-l-blue-500 hover:shadow-md transition-shadow">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Required at {selectedTimeSlot}</h3>
-            <p className="text-4xl font-black text-gray-800">{timeSlotRequired}</p>
+          <div className="bg-indigo-800/50 p-6 rounded-2xl border border-indigo-700">
+            <h3 className="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-2">Evening Requirement</h3>
+            <p className="text-4xl font-black text-white">{stats.evening.req}</p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-l-4 border-l-emerald-500 hover:shadow-md transition-shadow">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Present at {selectedTimeSlot}</h3>
-            <p className="text-4xl font-black text-emerald-500">{timeSlotPresent}</p>
+          <div className="bg-emerald-900/40 p-6 rounded-2xl border border-emerald-800/50">
+            <h3 className="text-xs font-bold text-emerald-400/80 uppercase tracking-wider mb-2">Evening Present</h3>
+            <div className="flex items-baseline gap-2">
+              <p className="text-4xl font-black text-emerald-400">{stats.evening.pres}</p>
+              <span className="text-lg font-bold text-emerald-500/80">({stats.evening.presPct}%)</span>
+            </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-l-4 border-l-rose-500 hover:shadow-md transition-shadow">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Absent at {selectedTimeSlot}</h3>
-            <p className="text-4xl font-black text-rose-500">{timeSlotAbsent}</p>
+          <div className="bg-rose-900/40 p-6 rounded-2xl border border-rose-800/50">
+            <h3 className="text-xs font-bold text-rose-400/80 uppercase tracking-wider mb-2">Evening Shortage</h3>
+            <div className="flex items-baseline gap-2">
+              <p className="text-4xl font-black text-rose-400">{stats.evening.abs}</p>
+              <span className="text-lg font-bold text-rose-500/80">({stats.evening.absPct}%)</span>
+            </div>
           </div>
         </div>
       </div>
