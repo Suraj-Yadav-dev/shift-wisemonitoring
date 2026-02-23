@@ -3,7 +3,7 @@
     "plant": "SDL SIKRI",
    "totalRequirement":  70,
     "shifts": [
-      { "name": "SPL A", "requirement": 30 },
+      { "name": "SPL A", "requirement": 4},
       { "name": "SPL B", "requirement": 30},
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
@@ -52,8 +52,8 @@
       { "name": "B", "requirement": 5 },
       { "name": "C", "requirement": 5 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 6 },
-      { "name": "S2", "requirement": 6 }
+      { "name": "S1", "requirement": 0 },
+      { "name": "S2", "requirement": 0 }
     ]
   },
   {

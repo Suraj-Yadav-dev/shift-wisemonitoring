@@ -8,7 +8,8 @@ const MORNING_SHIFTS = ["SPL A", "SPL B", "A", "G", "S1"];
 const EVENING_SHIFTS = ["B", "C", "S2"];
 
 export default function DayNightMonitoring() {
-  const { selectedPlant, selectedMonth, selectedShift } = useFilter();
+  // 🚀 FIX 1: Yahan se selectedShift hata diya hai
+  const { selectedPlant, selectedMonth } = useFilter();
 
   // ================= CALCULATION LOGIC =================
   const stats = useMemo(() => {
@@ -21,8 +22,7 @@ export default function DayNightMonitoring() {
       if (selectedPlant && plant.plant !== selectedPlant) return;
 
       plant.shifts?.forEach((shiftReq) => {
-        // Global Shift Filter Check
-        if (selectedShift && shiftReq.name !== selectedShift) return;
+        // 🚀 FIX 2: selectedShift wala return check hata diya hai
 
         if (MORNING_SHIFTS.includes(shiftReq.name)) {
           morningReq += shiftReq.requirement || 0;
@@ -37,7 +37,7 @@ export default function DayNightMonitoring() {
       if (selectedPlant && plant.plant !== selectedPlant) return;
 
       plant.shifts?.forEach((shiftAtt) => {
-        if (selectedShift && shiftAtt.name !== selectedShift) return;
+        // 🚀 FIX 3: selectedShift wala return check yahan se bhi hata diya hai
         
         const monthMatch = !selectedMonth || shiftAtt.month === selectedMonth;
 
@@ -67,7 +67,8 @@ export default function DayNightMonitoring() {
       morning: { req: morningReq, pres: morningPres, abs: morningAbs, presPct: morningPresPct, absPct: morningAbsPct },
       evening: { req: eveningReq, pres: eveningPres, abs: eveningAbs, presPct: eveningPresPct, absPct: eveningAbsPct }
     };
-  }, [selectedPlant, selectedMonth, selectedShift]);
+  // 🚀 FIX 4: Dependency array se selectedShift hata diya hai
+  }, [selectedPlant, selectedMonth]); 
 
   // ================= UI RENDER =================
   return (
