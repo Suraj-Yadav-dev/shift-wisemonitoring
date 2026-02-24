@@ -12,7 +12,7 @@
       { "name": "S1", "requirement": 0 },
       { "name": "S2", "requirement": 0 }
     ]
-
+    
   },
   {
     "plant": "VAPL SIKRI-2",
@@ -30,7 +30,7 @@
   },
   {
     "plant": "SHANKAR FORGE",
-    "totalRequirement": 12,
+    "totalRequirement": 11,
     "shifts": [
       { "name": "SPL A", "requirement": 11},
       { "name": "SPL B", "requirement": 0 },
@@ -44,7 +44,7 @@
   },
   {
     "plant": "RICO BAWAL",
-    "totalRequirement": 15,
+    "totalRequirement": 12,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
       { "name": "SPL B", "requirement": 0 },
