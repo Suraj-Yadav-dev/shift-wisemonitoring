@@ -1,7 +1,7 @@
 [
   {
     "plant": "SDL SIKRI",
-   "totalRequirement":  60,
+   "totalRequirement":  70,
     "shifts": [
       { "name": "SPL A", "requirement": 30 },
       { "name": "SPL B", "requirement": 30},
@@ -30,7 +30,7 @@
   },
   {
     "plant": "SHANKAR FORGE",
-    "totalRequirement": 11,
+    "totalRequirement": 12,
     "shifts": [
       { "name": "SPL A", "requirement": 11},
       { "name": "SPL B", "requirement": 0 },
@@ -72,10 +72,10 @@
   },
   {
     "plant": "POLYPLASTIC-BHIWADI",
-    "totalRequirement": 2,
+    "totalRequirement": 1,
     "shifts": [
       { "name": "SPL A", "requirement": 1 },
-      { "name": "SPL B", "requirement": 1 },
+      { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
