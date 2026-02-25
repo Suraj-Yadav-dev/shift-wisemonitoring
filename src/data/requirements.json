@@ -48,11 +48,11 @@
     "shifts": [
       { "name": "SPL A", "requirement": 0},
       { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 5 },
+      { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 5 },
       { "name": "C", "requirement": 5 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
+      { "name": "S1", "requirement": 5 },
       { "name": "S2", "requirement": 0 }
     ]
   },
