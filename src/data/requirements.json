@@ -3,8 +3,8 @@
     "plant": "SDL SIKRI",
    "totalRequirement":  70,
     "shifts": [
-      { "name": "SPL A", "requirement": 30 },
-      { "name": "SPL B", "requirement": 30},
+      { "name": "SPL A", "requirement": 35 },
+      { "name": "SPL B", "requirement": 35},
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
@@ -44,7 +44,7 @@
   },
   {
     "plant": "RICO BAWAL",
-    "totalRequirement": 12,
+    "totalRequirement": 15,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
       { "name": "SPL B", "requirement": 0 },
@@ -72,7 +72,7 @@
   },
   {
     "plant": "POLYPLASTIC-BHIWADI",
-    "totalRequirement": 1,
+    "totalRequirement": 2,
     "shifts": [
       { "name": "SPL A", "requirement": 1 },
       { "name": "SPL B", "requirement": 0 },
@@ -243,7 +243,7 @@
     "totalRequirement": 4,
     "shifts": [
       { "name": "SPL A", "requirement": 2 },
-      { "name": "SPL B", "requirement":  0},
+      { "name": "SPL B", "requirement": 0},
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },

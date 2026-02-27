@@ -782,7 +782,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": []
+        "attendance": [1,1,1,1,1,1,1,1]
       },
       {
         "name": "SPL B",
