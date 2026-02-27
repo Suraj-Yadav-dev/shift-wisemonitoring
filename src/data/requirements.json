@@ -84,20 +84,7 @@
       { "name": "S2", "requirement": 0 }
     ]
   },
-  {
-    "plant": "BHUNIT PALWAL",
-    "totalRequirement": 0,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
-  },
+
   {
     "plant": "VICTORA DHATIR",
     "totalRequirement": 26,
@@ -140,39 +127,12 @@
       { "name": "S2", "requirement": 0 }
     ]
   },
-  {
-    "plant": "MATJET",
-    "totalRequirement": 0,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
-  },
+  
   {
     "plant": "CUTTING EDGE DHATIR",
     "totalRequirement":3,
     "shifts": [
       { "name": "SPL A", "requirement": 3},
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
-  },
-  {
-    "plant": "VICTORA BAWAL",
-    "totalRequirement": 4,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
