@@ -917,11 +917,11 @@
       },
       {
         "name": "S1",
-        "attendance": [1]
+        "attendance": [1,1]
       },
       {
         "name": "S2",
-        "attendance": [1]
+        "attendance": []
       }
     ]
   },
