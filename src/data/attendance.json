@@ -42,7 +42,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1]
+        "attendance": [1,1]
       },
       {
         "name": "SPL B",
@@ -124,7 +124,7 @@
       },
       {
         "name": "A",
-        "attendance": [1,1,1]
+        "attendance": [3]
       },
       {
         "name": "B",
@@ -136,7 +136,7 @@
       },
       {
         "name": "G",
-        "attendance": []
+        "attendance": [1]
       },
       {
         "name": "S1",
@@ -309,7 +309,7 @@
       },
       {
         "name": "A",
-        "attendance": []
+        "attendance": [1,1,1,1,1]
       },
       {
         "name": "B",
@@ -325,7 +325,7 @@
       },
       {
         "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1]
       },
       {
         "name": "S2",
@@ -338,7 +338,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1]
       },
       {
         "name": "SPL B",
@@ -506,7 +506,7 @@
       },
       {
         "name": "G",
-        "attendance": [1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1.1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "S1",
@@ -654,7 +654,7 @@
       },
       {
         "name": "G",
-        "attendance": [1,1]
+        "attendance": []
       },
       {
         "name": "S1",
@@ -695,7 +695,7 @@
       },
       {
         "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1]
+        "attendance": []
       },
       {
         "name": "S2",
@@ -716,7 +716,7 @@
       },
       {
         "name": "A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "B",
@@ -954,7 +954,7 @@
       },
       {
         "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "S2",
@@ -975,7 +975,7 @@
       },
       {
         "name": "A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "B",
@@ -987,7 +987,7 @@
       },
       {
         "name": "G",
-        "attendance": []
+        "attendance": [1]
       },
       {
         "name": "S1",
