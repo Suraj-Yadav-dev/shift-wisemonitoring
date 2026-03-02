@@ -4,7 +4,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "attendance":[18]
       },
       {
         "name": "SPL B",
@@ -42,7 +42,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1]
+        "attendance": [1,1,1]
       },
       {
         "name": "SPL B",
@@ -79,7 +79,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [10]
       },
       {
         "name": "SPL B",
@@ -124,7 +124,7 @@
       },
       {
         "name": "A",
-        "attendance": [3]
+        "attendance": []
       },
       {
         "name": "B",
@@ -136,11 +136,11 @@
       },
       {
         "name": "G",
-        "attendance": [1]
+        "attendance": []
       },
       {
         "name": "S1",
-        "attendance": []
+        "attendance": [5]
       },
       {
         "name": "S2",
@@ -194,7 +194,7 @@
       },
       {
         "name": "SPL B",
-        "attendance": []
+        "attendance": [1]
       },
       {
         "name": "A",
@@ -264,7 +264,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": []
       },
       {
         "name": "SPL B",
