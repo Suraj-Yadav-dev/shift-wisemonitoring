@@ -4,7 +4,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance":[18]
+        "attendance":[1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "SPL B",
@@ -79,7 +79,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [10]
+        "attendance": [1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "SPL B",
@@ -140,7 +140,7 @@
       },
       {
         "name": "S1",
-        "attendance": [5]
+        "attendance": [1,1,1,1]
       },
       {
         "name": "S2",
@@ -194,7 +194,7 @@
       },
       {
         "name": "SPL B",
-        "attendance": [1]
+        "attendance": []
       },
       {
         "name": "A",
@@ -264,7 +264,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "SPL B",
@@ -309,7 +309,7 @@
       },
       {
         "name": "A",
-        "attendance": [1,1,1,1,1]
+        "attendance": []
       },
       {
         "name": "B",
@@ -325,7 +325,7 @@
       },
       {
         "name": "S1",
-        "attendance": [1,1,1,1,1]
+        "attendance": []
       },
       {
         "name": "S2",
@@ -338,7 +338,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1]
       },
       {
         "name": "SPL B",
@@ -412,7 +412,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1]
+        "attendance": [1,1]
       },
       {
         "name": "SPL B",
@@ -506,7 +506,7 @@
       },
       {
         "name": "G",
-        "attendance": [1.1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1]
       },
       {
         "name": "S1",
@@ -543,7 +543,7 @@
       },
       {
         "name": "G",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "S1",
@@ -695,7 +695,7 @@
       },
       {
         "name": "S1",
-        "attendance": []
+        "attendance": [1,1,1,1,1,1,1,1]
       },
       {
         "name": "S2",
@@ -716,7 +716,7 @@
       },
       {
         "name": "A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "B",
@@ -769,7 +769,7 @@
       },
       {
         "name": "S1",
-        "attendance": [1,1,1,1]
+        "attendance": [1,1,1]
       },
       {
         "name": "S2",
@@ -782,7 +782,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1]
+        "attendance": []
       },
       {
         "name": "SPL B",
@@ -843,7 +843,7 @@
       },
       {
         "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "S2",
@@ -856,7 +856,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1]
       },
       {
         "name": "SPL B",
@@ -954,7 +954,7 @@
       },
       {
         "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1,1,1,1]
       },
       {
         "name": "S2",
@@ -975,7 +975,7 @@
       },
       {
         "name": "A",
-        "attendance": [1,1,1,1,1,1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1]
       },
       {
         "name": "B",
@@ -1004,7 +1004,7 @@
     "shifts": [
       {
         "name": "SPL A",
-        "attendance": [1,1,1,1]
+        "attendance": [1,1,1,1,1,1,1,1]
       },
       {
         "name": "SPL B",
