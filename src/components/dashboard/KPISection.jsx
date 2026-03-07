@@ -4,330 +4,200 @@ import attendanceData from "../../data/attendance.json";
 import requirementsData from "../../data/requirements.json";
 
 // Shift Categorization
-const MORNING_SHIFTS = ["SPL A", "SPL B", "A", "G", "S1"];
-const EVENING_SHIFTS = ["B", "C", "S2"];
+const MORNING_SHIFTS = ["SPL A", "A", "G", "S1"];
+const EVENING_SHIFTS = ["B", "C", "S2", "SPL B"];
 
 export default function DayNightMonitoring() {
   const { selectedPlant, selectedMonth } = useFilter();
 
-  // ================= 1. ACTIVE SHIFTS LOGIC FOR SELECTED PLANT =================
-  const activeShiftsInfo = useMemo(() => {
-    if (!selectedPlant || selectedPlant === "All") return { morning: [], evening: [] };
+  // ================= 1. PERMANENT SYSTEM-WIDE DATA (NO DROPDOWN RELIANCE) =================
+  const permanentStats = useMemo(() => {
+    let totalAllotted = 0;
+    let totalPresent = 0;
+    let totalReq = 0;
 
-    const activeSet = new Set();
+    // Fixed Target from Requirements
+    requirementsData.forEach(p => { totalReq += p.totalRequirement || 0; });
 
-    const plantReq = requirementsData.find(p => p.plant === selectedPlant);
-    if (plantReq) {
-      plantReq.shifts?.forEach(s => {
-        if (s.requirement > 0) activeSet.add(s.name);
+    // Live Numbers from Attendance
+    attendanceData.forEach((plant) => {
+      plant.shifts?.forEach((shift) => {
+        totalAllotted += shift.allotted || 0;
+        totalPresent += shift.attendance?.filter((a) => a === 1).length || 0;
       });
-    }
+    });
 
-    const plantAtt = attendanceData.find(p => p.plant === selectedPlant);
-    if (plantAtt) {
-      plantAtt.shifts?.forEach(s => {
-        if (s.attendance && s.attendance.length > 0) activeSet.add(s.name);
-      });
-    }
+    const totalAbsent = Math.max(totalAllotted - totalPresent, 0);
+    const shortfallPct = totalAllotted > 0 ? ((totalAbsent / totalAllotted) * 100).toFixed(1) : "0.0";
 
-    const activeArray = Array.from(activeSet);
-    
-    return {
-      morning: activeArray.filter(s => MORNING_SHIFTS.includes(s)),
-      evening: activeArray.filter(s => EVENING_SHIFTS.includes(s))
-    };
-  }, [selectedPlant]);
+    return { totalAllotted, totalPresent, totalAbsent, shortfallPct, totalReq };
+  }, []);
 
-  // ================= 2. CALCULATION LOGIC =================
+  // ================= 2. FILTERED CALCULATION LOGIC (FOR THE LOWER GRIDS) =================
   const stats = useMemo(() => {
-    let morningReq = 0, morningPres = 0;
-    let eveningReq = 0, eveningPres = 0;
-    
-    // 🚨 Explicitly track the "totalRequirement" field from JSON
-    let exactOverallRequirement = 0; 
+    let currentReq = 0, morningPres = 0, eveningPres = 0;
+    let morningReq = 0, eveningReq = 0;
 
     const shiftDetails = {};
     [...MORNING_SHIFTS, ...EVENING_SHIFTS].forEach(s => {
-      shiftDetails[s] = { name: s, req: 0, pres: 0 };
+      shiftDetails[s] = { name: s, req: 0, pres: 0, allotted: 0 };
     });
 
-    // --- Calculate Requirements ---
+    // Sync Requirements
     requirementsData.forEach((plant) => {
-      // Safe filter check (handles if state is "All" or empty string "")
       if (selectedPlant && selectedPlant !== "All" && plant.plant !== selectedPlant) return;
-
-      // 🚨 ADD DIRECTLY FROM JSON FIELD (This creates your 411 total)
-      exactOverallRequirement += plant.totalRequirement || 0;
-
-      // Still calculate individual shifts for the breakdown cards
-      plant.shifts?.forEach((shiftReq) => {
-        if (shiftDetails[shiftReq.name]) {
-          shiftDetails[shiftReq.name].req += shiftReq.requirement || 0;
-        }
-        if (MORNING_SHIFTS.includes(shiftReq.name)) {
-          morningReq += shiftReq.requirement || 0;
-        } else if (EVENING_SHIFTS.includes(shiftReq.name)) {
-          eveningReq += shiftReq.requirement || 0;
-        }
+      currentReq += plant.totalRequirement || 0;
+      plant.shifts?.forEach((s) => {
+        if (shiftDetails[s.name]) shiftDetails[s.name].req += s.requirement || 0;
+        if (MORNING_SHIFTS.includes(s.name)) morningReq += s.requirement || 0;
+        if (EVENING_SHIFTS.includes(s.name)) eveningReq += s.requirement || 0;
       });
     });
 
-    // --- Calculate Attendance ---
+    // Sync Attendance
     attendanceData.forEach((plant) => {
       if (selectedPlant && selectedPlant !== "All" && plant.plant !== selectedPlant) return;
-
-      plant.shifts?.forEach((shiftAtt) => {
-        const monthMatch = !selectedMonth || selectedMonth === "All" || shiftAtt.month === selectedMonth;
-
+      plant.shifts?.forEach((shift) => {
+        const monthMatch = !selectedMonth || selectedMonth === "All" || shift.month === selectedMonth;
         if (monthMatch) {
-          const presentCount = shiftAtt.attendance?.filter((a) => a === 1).length || 0;
-          
-          if (shiftDetails[shiftAtt.name]) {
-            shiftDetails[shiftAtt.name].pres += presentCount;
+          const presentCount = shift.attendance?.filter((a) => a === 1).length || 0;
+          if (shiftDetails[shift.name]) {
+            shiftDetails[shift.name].pres += presentCount;
+            shiftDetails[shift.name].allotted += (shift.allotted || 0);
           }
-          if (MORNING_SHIFTS.includes(shiftAtt.name)) {
-            morningPres += presentCount;
-          } else if (EVENING_SHIFTS.includes(shiftAtt.name)) {
-            eveningPres += presentCount;
-          }
+          if (MORNING_SHIFTS.includes(shift.name)) morningPres += presentCount;
+          if (EVENING_SHIFTS.includes(shift.name)) eveningPres += presentCount;
         }
       });
     });
 
-    // Sub-totals
-    const morningAbs = Math.max(morningReq - morningPres, 0);
-    const eveningAbs = Math.max(eveningReq - eveningPres, 0);
-
-    const morningPresPct = morningReq > 0 ? ((morningPres / morningReq) * 100).toFixed(1) : 0;
-    const morningAbsPct = morningReq > 0 ? ((morningAbs / morningReq) * 100).toFixed(1) : 0;
-
-    const eveningPresPct = eveningReq > 0 ? ((eveningPres / eveningReq) * 100).toFixed(1) : 0;
-    const eveningAbsPct = eveningReq > 0 ? ((eveningAbs / eveningReq) * 100).toFixed(1) : 0;
-
-    const formatShiftData = (name) => {
-      const data = shiftDetails[name];
-      const abs = Math.max(data.req - data.pres, 0);
-      const presPct = data.req > 0 ? ((data.pres / data.req) * 100).toFixed(1) : 0;
-      return { ...data, abs, presPct };
+    const calculateMetrics = (req, pres) => {
+      const abs = Math.max(req - pres, 0);
+      const sPct = req > 0 ? ((abs / req) * 100).toFixed(1) : "0.0";
+      const pPct = req > 0 ? ((pres / req) * 100).toFixed(1) : "0.0";
+      return { req, pres, abs, sPct, pPct };
     };
 
-    const morningDetails = MORNING_SHIFTS.map(formatShiftData).filter(s => s.req > 0 || s.pres > 0);
-    const eveningDetails = EVENING_SHIFTS.map(formatShiftData).filter(s => s.req > 0 || s.pres > 0);
+    const morning = calculateMetrics(morningReq, morningPres);
+    const evening = calculateMetrics(eveningReq, eveningPres);
+    const overall = calculateMetrics(currentReq, morningPres + eveningPres);
 
-    // --- OVERALL TOTALS ---
-    // Override the total with your exact JSON value
-    const totalReq = exactOverallRequirement; 
-    const totalPres = morningPres + eveningPres;
-    const totalAbs = Math.max(totalReq - totalPres, 0);
-    
-    const totalPresPct = totalReq > 0 ? ((totalPres / totalReq) * 100).toFixed(1) : 0;
-    const totalAbsPct = totalReq > 0 ? ((totalAbs / totalReq) * 100).toFixed(1) : 0;
+    const morningDetails = MORNING_SHIFTS.map(s => ({ ...shiftDetails[s], ...calculateMetrics(shiftDetails[s].req, shiftDetails[s].pres) })).filter(d => d.req > 0 || d.pres > 0);
+    const eveningDetails = EVENING_SHIFTS.map(s => ({ ...shiftDetails[s], ...calculateMetrics(shiftDetails[s].req, shiftDetails[s].pres) })).filter(d => d.req > 0 || d.pres > 0);
 
-    return {
-      morning: { req: morningReq, pres: morningPres, abs: morningAbs, presPct: morningPresPct, absPct: morningAbsPct },
-      evening: { req: eveningReq, pres: eveningPres, abs: eveningAbs, presPct: eveningPresPct, absPct: eveningAbsPct },
-      overall: { req: totalReq, pres: totalPres, abs: totalAbs, presPct: totalPresPct, absPct: totalAbsPct },
-      morningDetails,
-      eveningDetails
-    };
-  }, [selectedPlant, selectedMonth]); 
+    return { morning, evening, overall, morningDetails, eveningDetails };
+  }, [selectedPlant, selectedMonth]);
 
-  // ================= UI RENDER =================
   return (
-    <div className="space-y-12">
-
-      {/* ===== 🌍 OVERALL SUMMARY SECTION ===== */}
-      <div className="bg-blue-50/50 p-6 sm:p-8 rounded-3xl border border-blue-100 shadow-sm transition-all hover:shadow-md">
-        <div className="mb-6">
-          <h2 className="text-2xl font-extrabold text-blue-900 flex items-center gap-3">
-            <span className="text-3xl">🌍</span> Overall Summary (All Shifts)
-          </h2>
-          <p className="text-blue-700/80 text-sm mt-1 font-medium">
-            {selectedPlant && selectedPlant !== "All"
-              ? `Total Day & Night combined metrics for ${selectedPlant}` 
-              : "Total Day & Night combined metrics across ALL plants"}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-blue-500">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Total Requirement</h3>
-            {/* 🚨 This now outputs the exact sum of your JSON's "totalRequirement" field */}
-            <p className="text-4xl font-black text-gray-800">{stats.overall.req}</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-emerald-500">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Total Present</h3>
-            <div className="flex items-baseline gap-2">
-              <p className="text-4xl font-black text-emerald-500">{stats.overall.pres}</p>
-              <span className="text-lg font-bold text-emerald-400">({stats.overall.presPct}%)</span>
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-rose-500">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Total Shortage</h3>
-            <div className="flex items-baseline gap-2">
-              <p className="text-4xl font-black text-rose-500">{stats.overall.abs}</p>
-              <span className="text-lg font-bold text-rose-400">({stats.overall.absPct}%)</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="space-y-8 p-4">
       
-      {/* ===== ☀️ MORNING SHIFTS SECTION ===== */}
-      <div className="bg-amber-50/50 p-6 sm:p-8 rounded-3xl border border-amber-100 shadow-sm transition-all hover:shadow-md">
-        <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <h2 className="text-2xl font-extrabold text-amber-900 flex items-center gap-3">
-              <span className="text-3xl">☀️</span> Morning Shifts Overview
-            </h2>
-            <p className="text-amber-700/80 text-sm mt-1 font-medium">
-              Includes shifts starting between 6:00 AM to 9:30 AM
-            </p>
+      {/* ===== 📊 PERMANENT GRID 1: SYSTEM TOTAL ALLOTTED (FIXED) ===== */}
+      <div className="bg-slate-900 p-8 rounded-[2rem] shadow-2xl text-white">
+        <h2 className="text-xl font-bold text-slate-400 mb-6 flex items-center gap-2">
+          <span className="p-2 bg-slate-800 rounded-lg">📋</span> Permanent System Attendance (Total Allotted)
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="bg-slate-800/50 p-6 rounded-2xl border-l-4 border-blue-400 shadow-inner">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Total Allotted</h3>
+            <p className="text-5xl font-black">{permanentStats.totalAllotted}</p>
           </div>
-
-          {selectedPlant && selectedPlant !== "All" && (
-            <div className="flex flex-wrap items-center gap-2 bg-amber-100/50 px-4 py-2 rounded-xl border border-amber-200">
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Active Now:</span>
-              {activeShiftsInfo.morning.length > 0 ? (
-                activeShiftsInfo.morning.map(shift => (
-                  <span key={shift} className="bg-amber-400 text-amber-950 px-3 py-1 rounded-md text-xs font-black shadow-sm">
-                    {shift}
-                  </span>
-                ))
-              ) : (
-                <span className="text-xs italic text-amber-600">None</span>
-              )}
-            </div>
-          )}
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-amber-400">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Morning Requirement</h3>
-            <p className="text-4xl font-black text-gray-800">{stats.morning.req}</p>
+          <div className="bg-slate-800/50 p-6 rounded-2xl border-l-4 border-emerald-400 shadow-inner">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Total Present</h3>
+            <p className="text-5xl font-black text-emerald-400">{permanentStats.totalPresent}</p>
           </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-emerald-500">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Morning Present</h3>
-            <div className="flex items-baseline gap-2">
-              <p className="text-4xl font-black text-emerald-500">{stats.morning.pres}</p>
-              <span className="text-lg font-bold text-emerald-400">({stats.morning.presPct}%)</span>
-            </div>
+          <div className="bg-slate-800/50 p-6 rounded-2xl border-l-4 border-rose-400 shadow-inner">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Total Absent</h3>
+            <p className="text-5xl font-black text-rose-400">{permanentStats.totalAbsent}</p>
           </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-l-rose-500">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Morning Shortage</h3>
-            <div className="flex items-baseline gap-2">
-              <p className="text-4xl font-black text-rose-500">{stats.morning.abs}</p>
-              <span className="text-lg font-bold text-rose-400">({stats.morning.absPct}%)</span>
-            </div>
+          <div className="bg-slate-800/50 p-6 rounded-2xl border-l-4 border-amber-400 shadow-inner">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Shortfall %</h3>
+            <p className="text-5xl font-black text-amber-400">{permanentStats.shortfallPct}%</p>
           </div>
         </div>
-
-        {/* --- ☀️ DETAILED MORNING SHIFT BREAKDOWN --- */}
-        {stats.morningDetails.length > 0 && (
-          <div className="pt-6 border-t border-amber-200/60">
-            <h3 className="text-sm font-bold text-amber-800 uppercase tracking-wider mb-4">Detailed Shift Breakdown</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {stats.morningDetails.map(shift => (
-                <div key={shift.name} className="bg-white/80 p-4 rounded-xl border border-amber-200 shadow-sm flex justify-between items-center">
-                  <div>
-                    <span className="font-black text-amber-900 bg-amber-200/50 border border-amber-300 px-2 py-0.5 rounded text-sm">{shift.name}</span>
-                    <div className="text-xs text-gray-600 mt-2 font-medium">
-                      Req: {shift.req} | Pres: <span className="text-emerald-600 font-bold">{shift.pres}</span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className={`font-bold text-sm ${shift.abs > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
-                      {shift.abs > 0 ? `Short: ${shift.abs}` : 'Full'}
-                    </span>
-                    <div className="text-xs font-bold text-gray-400 mt-1">{shift.presPct}%</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* ===== 🌙 EVENING & NIGHT SHIFTS SECTION ===== */}
-      <div className="bg-indigo-900 p-6 sm:p-8 rounded-3xl border border-indigo-800 shadow-lg text-white transition-all hover:shadow-xl">
-        <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <h2 className="text-2xl font-extrabold text-indigo-100 flex items-center gap-3">
-              <span className="text-3xl">🌙</span> Evening & Night Shifts Overview
-            </h2>
-            <p className="text-indigo-300 text-sm mt-1 font-medium">
-              Includes shifts starting between 2:30 PM to 11:00 PM
-            </p>
-          </div>
-
-          {selectedPlant && selectedPlant !== "All" && (
-            <div className="flex flex-wrap items-center gap-2 bg-indigo-800/80 px-4 py-2 rounded-xl border border-indigo-700">
-              <span className="text-xs font-bold text-indigo-300 uppercase tracking-wider">Active Now:</span>
-              {activeShiftsInfo.evening.length > 0 ? (
-                activeShiftsInfo.evening.map(shift => (
-                  <span key={shift} className="bg-indigo-500 text-white px-3 py-1 rounded-md text-xs font-black shadow-sm">
-                    {shift}
-                  </span>
-                ))
-              ) : (
-                <span className="text-xs italic text-indigo-400">None</span>
-              )}
-            </div>
-          )}
+      {/* ===== 🌍 GRID 2: FILTERED PLANT OVERVIEW ===== */}
+      <div className="bg-blue-50/50 p-6 rounded-3xl border border-blue-100 shadow-sm transition-all">
+        <h2 className="text-2xl font-extrabold text-blue-900 mb-6">
+          🌍 {selectedPlant === "All" ? "Filtered: All Plants" : `Selected: ${selectedPlant}`}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <MetricCard label="Current Target" value={stats.overall.req} color="blue" />
+          <MetricCard label="Plant Present" value={stats.overall.pres} subValue={`${stats.overall.pPct}%`} color="emerald" />
+          <MetricCard label="Plant Shortage" value={stats.overall.abs} subValue={`${stats.overall.sPct}%`} color="rose" />
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-          <div className="bg-indigo-800/50 p-6 rounded-2xl border border-indigo-700">
-            <h3 className="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-2">Evening Requirement</h3>
-            <p className="text-4xl font-black text-white">{stats.evening.req}</p>
-          </div>
-
-          <div className="bg-emerald-900/40 p-6 rounded-2xl border border-emerald-800/50">
-            <h3 className="text-xs font-bold text-emerald-400/80 uppercase tracking-wider mb-2">Evening Present</h3>
-            <div className="flex items-baseline gap-2">
-              <p className="text-4xl font-black text-emerald-400">{stats.evening.pres}</p>
-              <span className="text-lg font-bold text-emerald-500/80">({stats.evening.presPct}%)</span>
-            </div>
-          </div>
-
-          <div className="bg-rose-900/40 p-6 rounded-2xl border border-rose-800/50">
-            <h3 className="text-xs font-bold text-rose-400/80 uppercase tracking-wider mb-2">Evening Shortage</h3>
-            <div className="flex items-baseline gap-2">
-              <p className="text-4xl font-black text-rose-400">{stats.evening.abs}</p>
-              <span className="text-lg font-bold text-rose-500/80">({stats.evening.absPct}%)</span>
-            </div>
-          </div>
-        </div>
-
-        {/* --- 🌙 DETAILED EVENING SHIFT BREAKDOWN --- */}
-        {stats.eveningDetails.length > 0 && (
-          <div className="pt-6 border-t border-indigo-700/60">
-            <h3 className="text-sm font-bold text-indigo-300 uppercase tracking-wider mb-4">Detailed Shift Breakdown</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {stats.eveningDetails.map(shift => (
-                <div key={shift.name} className="bg-indigo-800/40 p-4 rounded-xl border border-indigo-600 shadow-sm flex justify-between items-center">
-                  <div>
-                    <span className="font-black text-indigo-100 bg-indigo-600/50 border border-indigo-500 px-2 py-0.5 rounded text-sm">{shift.name}</span>
-                    <div className="text-xs text-indigo-200 mt-2 font-medium">
-                      Req: {shift.req} | Pres: <span className="text-emerald-400 font-bold">{shift.pres}</span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className={`font-bold text-sm ${shift.abs > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
-                      {shift.abs > 0 ? `Short: ${shift.abs}` : 'Full'}
-                    </span>
-                    <div className="text-xs font-bold text-indigo-400 mt-1">{shift.presPct}%</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
+      {/* ===== ☀️ GRID 3: MORNING MONITORING ===== */}
+      <div className="bg-amber-50/50 p-6 rounded-3xl border border-amber-100 shadow-sm">
+        <h2 className="text-2xl font-extrabold text-amber-900 mb-6 flex items-center gap-3">
+          <span className="text-3xl">☀️</span> Morning Shift Performance
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+          <MetricCard label="Morning Allotted" value={stats.morning.req} color="amber" />
+          <MetricCard label="Morning Present" value={stats.morning.pres} subValue={`${stats.morning.pPct}%`} color="emerald" />
+          <MetricCard label="Morning Shortage" value={stats.morning.abs} subValue={`${stats.morning.sPct}%`} color="rose" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {stats.morningDetails.map(shift => <ShiftDetailCard key={shift.name} shift={shift} type="morning" />)}
+        </div>
+      </div>
+
+      {/* ===== 🌙 GRID 4: EVENING MONITORING ===== */}
+      <div className="bg-indigo-900 p-6 rounded-3xl border border-indigo-800 text-white shadow-lg">
+        <h2 className="text-2xl font-extrabold text-indigo-100 mb-6 flex items-center gap-3">
+          <span className="text-3xl">🌙</span> Evening Shift Performance
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+          <MetricCard label="Evening Allotted" value={stats.evening.req} color="indigo" isDark />
+          <MetricCard label="Evening Present" value={stats.evening.pres} subValue={`${stats.evening.pPct}%`} color="emerald" isDark />
+          <MetricCard label="Evening Shortage" value={stats.evening.abs} subValue={`${stats.evening.sPct}%`} color="rose" isDark />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {stats.eveningDetails.map(shift => <ShiftDetailCard key={shift.name} shift={shift} type="evening" />)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Sub-component for individual Metric Cards
+function MetricCard({ label, value, subValue, color, isDark }) {
+  const borderColors = {
+    blue: "border-blue-500",
+    emerald: "border-emerald-500",
+    rose: "border-rose-500",
+    amber: "border-amber-500",
+    indigo: "border-indigo-400"
+  };
+  return (
+    <div className={`${isDark ? 'bg-indigo-800/50 border-indigo-700' : 'bg-white border-gray-100'} p-6 rounded-2xl shadow-sm border-l-4 ${borderColors[color]}`}>
+      <h3 className={`text-xs font-bold uppercase tracking-widest mb-2 ${isDark ? 'text-indigo-300' : 'text-gray-400'}`}>{label}</h3>
+      <div className="flex items-baseline gap-2">
+        <p className={`text-4xl font-black ${isDark ? 'text-white' : 'text-gray-800'}`}>{value}</p>
+        {subValue && <span className="text-lg font-bold opacity-70">{subValue}</span>}
+      </div>
+    </div>
+  );
+}
+
+// Sub-component for Shift Breakdown
+function ShiftDetailCard({ shift, type }) {
+  const isMorning = type === 'morning';
+  return (
+    <div className={`${isMorning ? 'bg-white border-amber-200' : 'bg-indigo-800/40 border-indigo-600'} p-4 rounded-xl border shadow-sm flex justify-between items-center`}>
+      <div>
+        <span className={`font-black px-2 py-0.5 rounded text-xs ${isMorning ? 'bg-amber-200 text-amber-900' : 'bg-indigo-600 text-white'}`}>{shift.name}</span>
+        <div className={`text-[10px] mt-2 font-medium ${isMorning ? 'text-gray-600' : 'text-indigo-200'}`}>
+          A: {shift.allotted} | P: <span className="text-emerald-500 font-bold">{shift.present}</span>
+        </div>
+      </div>
+      <div className="text-right">
+        <span className={`font-bold text-xs ${shift.absent > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
+          {shift.absent > 0 ? `-${shift.absent}` : 'OK'}
+        </span>
+        <div className="text-[10px] font-bold text-gray-400 mt-1">{shift.pPct}%</div>
+      </div>
     </div>
   );
 }

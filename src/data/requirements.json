@@ -29,10 +29,24 @@
     ]
   },
   {
+    "plant": "Bhgwati",
+    "totalRequirement": 10,
+    "shifts": [
+      { "name": "SPL A", "requirement":7},
+      { "name": "SPL B", "requirement": 3},
+      { "name": "A", "requirement": 0 },
+      { "name": "B", "requirement": 0 },
+      { "name": "C", "requirement": 0 },
+      { "name": "G", "requirement": 0 },
+      { "name": "S1", "requirement": 0 },
+      { "name": "S2", "requirement": 0 }
+    ]
+  },
+  {
     "plant": "SHANKAR FORGE",
     "totalRequirement": 11,
     "shifts": [
-      { "name": "SPL A", "requirement": 11},
+      { "name": "SPL A", "requirement":12},
       { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
@@ -59,14 +73,14 @@
   
   {
     "plant": "POLYPLASTIC-BHIWADI",
-    "totalRequirement": 2,
+    "totalRequirement": 1,
     "shifts": [
       { "name": "SPL A", "requirement": 1 },
       { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 1 },
+      { "name": "G", "requirement": 0},
       { "name": "S1", "requirement": 0},
       { "name": "S2", "requirement": 0 }
     ]
@@ -76,8 +90,8 @@
     "plant": "VICTORA DHATIR",
     "totalRequirement": 26,
     "shifts": [
-      { "name": "SPL A", "requirement": 13},
-      { "name": "SPL B", "requirement": 13},
+      { "name": "SPL A", "requirement": 14},
+      { "name": "SPL B", "requirement": 12},
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
@@ -90,14 +104,14 @@
     "plant": "SKH MANESER PLANT 2",
     "totalRequirement": 18,
     "shifts": [
-      { "name": "SPL A", "requirement": 0 },
+      { "name": "SPL A", "requirement": 0},
       { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement":  0},
-      { "name": "B", "requirement":  0},
+      { "name": "A", "requirement":  9},
+      { "name": "B", "requirement": 9},
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 9 },
-      { "name": "S2", "requirement": 9 }
+      { "name": "S1", "requirement": 0},
+      { "name": "S2", "requirement": 0}
     ]
   },
   {
@@ -129,7 +143,7 @@
       { "name": "S2", "requirement": 0 }
     ]
   },
-  
+
   {
     "plant": "NIROTECH",
     "totalRequirement": 26,
@@ -151,10 +165,10 @@
       { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement":  2},
-      { "name": "B", "requirement":  0},
+      { "name": "B", "requirement":  2},
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 2 },
+      { "name": "S1", "requirement":  0},
       { "name": "S2", "requirement": 0 }
     ]
   },
@@ -177,18 +191,18 @@
     "totalRequirement": 4,
     "shifts": [
       { "name": "SPL A", "requirement": 2 },
-      { "name": "SPL B", "requirement": 0},
+      { "name": "SPL B", "requirement": 2},
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 2 },
+      { "name": "G", "requirement": 0},
       { "name": "S1", "requirement": 0 },
       { "name": "S2", "requirement": 0 }
     ]
   },
   {
     "plant": "SUNBEAM BAWAL",
-    "totalRequirement": 23,
+    "totalRequirement": 16,
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
@@ -202,16 +216,16 @@
   },
   {
     "plant": "KML",
-    "totalRequirement": 46,
+    "totalRequirement": 30,
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 25 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
+      { "name": "A", "requirement": 0},
+      { "name": "B", "requirement": 0},
+      { "name": "C", "requirement": 0},
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 11 }
+      { "name": "S1", "requirement": 15},
+      { "name": "S2", "requirement": 15}
     ]
   },
   {
@@ -246,21 +260,21 @@
     "plant": "VAPL PATHREDI",
     "totalRequirement": 60,
     "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
+      { "name": "SPL A", "requirement":30},
+      { "name": "SPL B", "requirement": 30},
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 30 },
-      { "name": "S2", "requirement": 30 }
+      { "name": "S1", "requirement":0 },
+      { "name": "S2", "requirement":0}
     ]
   },
   {
     "plant": "VAPL DHATIR B.O.P",
-    "totalRequirement": 9,
+    "totalRequirement": 11,
     "shifts": [
-      { "name": "SPL A", "requirement": 9 },
+      { "name": "SPL A", "requirement": 11},
       { "name": "SPL B", "requirement":  0},
       { "name": "A", "requirement": 0 },
       { "name": "B", "requirement": 0 },
@@ -305,9 +319,9 @@
       { "name": "SPL A", "requirement": 0 },
       { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement": 9},
-      { "name": "B", "requirement": 0 },
+      { "name": "B", "requirement": 9},
       { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 9 },
+      { "name": "G", "requirement": 0},
       { "name": "S1", "requirement": 0 },
       { "name": "S2", "requirement": 0 }
     ]

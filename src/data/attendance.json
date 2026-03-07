@@ -2,1040 +2,317 @@
   {
     "plant": "SDL SIKRI",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance":[1,1,1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance":[]
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "allotted": 10 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
-    "plant":"VAPL SIKRI-2",
- 
+  {
+    "plant": "VAPL SIKRI-2",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1,1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [1, 1, 1], "allotted": 3 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "SHANKAR FORGE",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,0,0], "allotted": 12 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "RICO BAWAL",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": [1,1,1,1]
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [1,1,1,1,1],"allotted":5},
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0},
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
-    "plant": "SUNBEAM TAPUKARA",
-    "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
-    ]
-  },
-    {
+  
+  {
     "plant": "POLYPLASTIC-BHIWADI",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0},
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [1], "allotted": 1 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
-    "plant": "BHUNIT PALWAL",
-    "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
-    ]
-  },
-    {
+  
+  {
     "plant": "VICTORA DHATIR (JD)",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,0,0], "allotted": 14 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "SKH MANESER PLANT 2",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance":[]
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,1], "allotted": 9 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "VAPL BAWAL-1",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,0,0,0,0], "allotted": 12 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
-    "plant": "MATJET",
-    "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
-    ]
-  },
-    {
+  
+  {
     "plant": "CUTTING EDGE DHATIR",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted":  0},
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [1], "allotted": 1 },
+      { "name": "B", "attendance": [1], "allotted": 1 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
-    "plant": "VICTORA BAWAL",
-    "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
-    ]
-  },
-    {
+
+  {
     "plant": "BHAGWATI TECHNO",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": [1,1,1]
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,0,0,0,0,0], "allotted": 12 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "NIROTECH",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], "allotted": 26 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "SKH-1",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": [1,1]
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [1, 1], "allotted": 2 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "SATA VIKAS",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": [1]
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [1], "allotted": 2 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "MT ATUOCRAFT ROHTAK",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [1,1,1], "allotted": 3 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "SUNBEAM BAWAL",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [1, 1, 1, 1, 1, 1, 1, 1], "allotted": 8 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "KML",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": [1,1,1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0], "allotted": 21 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "POLYPLASTIC-TAMIL NADU",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": [1,1,1]
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [1, 1, 1,1], "allotted": 4 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "VAPL PRITHLA",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "VAPL PATHREDI",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0], "allotted": 20 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "VAPL DHATIR(B.O.P)",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1,0,0,0,0], "allotted": 11 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "VIBRO CAUSTIC",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": [1,1]
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [1, 1], "allotted": 2 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "GLOBAL NOIDA",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": [1,1,1,1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0], "allotted": 17 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
-    {
+  {
     "plant": "SKH-4",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": []
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": [1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": [1]
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0},
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0},
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
   {
     "plant": "PANCHKULA STEELS",
     "shifts": [
-      {
-        "name": "SPL A",
-        "attendance": [1,1,1,1,1,1,1,1]
-      },
-      {
-        "name": "SPL B",
-        "attendance": []
-      },
-      {
-        "name": "A",
-        "attendance": []
-      },
-      {
-        "name": "B",
-        "attendance": []
-      },
-      {
-        "name": "C",
-        "attendance": []
-      },
-      {
-        "name": "G",
-        "attendance": []
-      },
-      {
-        "name": "S1",
-        "attendance": []
-      },
-      {
-        "name": "S2",
-        "attendance": []
-      }
+      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1,0], "allotted": 7 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0 },
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [], "allotted": 0 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   }
-
-
 ]
