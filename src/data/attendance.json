@@ -152,7 +152,7 @@
       { "name": "SPL A", "attendance": [], "allotted": 0 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
       { "name": "A", "attendance": [1, 1], "allotted": 2 },
-      { "name": "B", "attendance": [1,1],"alloted": 2},
+      { "name": "B", "attendance": [1,1,1],"alloted": 2},
       { "name": "C", "attendance": [], "allotted": 0 },
       { "name": "G", "attendance": [], "allotted": 0 },
       { "name": "S1", "attendance": [], "allotted": 0 },
