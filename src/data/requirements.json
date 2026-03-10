@@ -107,7 +107,7 @@
       { "name": "SPL A", "requirement": 0},
       { "name": "SPL B", "requirement": 0 },
       { "name": "A", "requirement":  9},
-      { "name": "B", "requirement": 9},
+      { "name": "B", "requirement": 10},
       { "name": "C", "requirement": 0 },
       { "name": "G", "requirement": 0 },
       { "name": "S1", "requirement": 0},
