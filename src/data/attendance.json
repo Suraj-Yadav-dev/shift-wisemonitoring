@@ -246,7 +246,7 @@
       { "name": "B", "attendance": [], "allotted": 0 },
       { "name": "C", "attendance": [], "allotted": 0 },
       { "name": "G", "attendance": [], "allotted": 0 },
-      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0], "allotted": 20 },
+      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0], "allotted": 20 },
       { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
