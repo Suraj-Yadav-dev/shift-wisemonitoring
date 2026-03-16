@@ -2,7 +2,7 @@
   {
     "plant": "SDL SIKRI",
     "shifts": [
-      { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0], "allotted": 35 },
+      { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], "allotted": 35 },
       { "name": "SPL B", "attendance": [], "allotted": 35},
       { "name": "A", "attendance": [], "allotted": 0 },
       { "name": "B", "attendance": [], "allotted": 0 },
@@ -28,7 +28,7 @@
   {
     "plant": "SHANKAR FORGE",
     "shifts": [
-      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1, 1,0,0,0,0], "allotted": 12 },
+      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1, 1,0,0,0], "allotted": 11 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
       { "name": "A", "attendance": [], "allotted": 0 },
       { "name": "B", "attendance": [], "allotted": 0 },
@@ -69,7 +69,7 @@
   {
     "plant": "VICTORA DHATIR (JD)",
     "shifts": [
-      { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,0,0,0,0,0,0,0], "allotted": 14 },
+      { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0], "allotted": 16 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
       { "name": "A", "attendance": [], "allotted": 0 },
       { "name": "B", "attendance": [], "allotted": 0 },
@@ -203,7 +203,7 @@
     "shifts": [
       { "name": "SPL A", "attendance": [], "allotted": 0 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
-      { "name": "A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0], "allotted": 22 },
+      { "name": "A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0], "allotted": 16 },
       { "name": "B", "attendance": [], "allotted": 0 },
       { "name": "C", "attendance": [], "allotted": 0 },
       { "name": "G", "attendance": [], "allotted": 0 },
@@ -246,7 +246,7 @@
       { "name": "B", "attendance": [], "allotted": 0 },
       { "name": "C", "attendance": [], "allotted": 0 },
       { "name": "G", "attendance": [], "allotted": 0 },
-      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0], "allotted": 20 },
+      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0], "allotted": 30 },
       { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
