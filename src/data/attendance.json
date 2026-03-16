@@ -28,7 +28,7 @@
   {
     "plant": "SHANKAR FORGE",
     "shifts": [
-      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1, 0,0,0,0,0], "allotted": 12 },
+      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1, 1,0,0,0,0], "allotted": 12 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
       { "name": "A", "attendance": [], "allotted": 0 },
       { "name": "B", "attendance": [], "allotted": 0 },
