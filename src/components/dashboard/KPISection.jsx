@@ -11,14 +11,12 @@ export default function KPISection() {
     let totalPresent = 0;
     let totalReq = 0;
 
-    // 1. Calculate Target from Requirements
     requirementsData.forEach((p) => {
       if (!selectedPlant || selectedPlant === "All" || p.plant === selectedPlant) {
         totalReq += p.totalRequirement || 0;
       }
     });
 
-    // 2. Calculate Live Attendance
     attendanceData.forEach((plant) => {
       if (!selectedPlant || selectedPlant === "All" || plant.plant === selectedPlant) {
         plant.shifts?.forEach((shift) => {
@@ -32,22 +30,21 @@ export default function KPISection() {
     });
 
     const totalAbsent = Math.max(totalAllotted - totalPresent, 0);
-    
-    // Efficiency: (Present / Allotted)
     const efficiency = totalAllotted > 0 ? ((totalPresent / totalAllotted) * 100).toFixed(1) : "0.0";
-    
-    // NEW: Shortfall Percentage (Absent / Allotted)
     const shortfallPercentage = totalAllotted > 0 ? ((totalAbsent / totalAllotted) * 100).toFixed(1) : "0.0";
-    
     const gap = Math.max(totalReq - totalPresent, 0);
 
     return { totalAllotted, totalPresent, totalAbsent, efficiency, shortfallPercentage, totalReq, gap };
   }, [selectedPlant, selectedMonth]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    /* Responsive Grid Logic:
+       - grid-cols-1: Mobile (Single Column)
+       - sm:grid-cols-2: Tablets / Small Laptops
+       - lg:grid-cols-4: Desktop (Full Width)
+    */
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 px-2 md:px-0">
       
-      {/* KPI: TOTAL CAPACITY */}
       <KPICard 
         title="Total Capacity" 
         value={kpiStats.totalAllotted} 
@@ -56,7 +53,6 @@ export default function KPISection() {
         variant="blue" 
       />
 
-      {/* KPI: TOTAL PRESENT */}
       <KPICard 
         title="Live Presence" 
         value={kpiStats.totalPresent} 
@@ -65,7 +61,6 @@ export default function KPISection() {
         variant="gold" 
       />
 
-      {/* KPI: MANPOWER SHORTFALL (Updated with Percentage) */}
       <KPICard 
         title="Shortfall" 
         value={kpiStats.totalAbsent} 
@@ -74,7 +69,6 @@ export default function KPISection() {
         variant="rose" 
       />
 
-      {/* KPI: TARGET VARIANCE */}
       <KPICard 
         title="Production Gap" 
         value={kpiStats.gap} 
@@ -103,17 +97,26 @@ function KPICard({ title, value, subText, icon, variant }) {
   };
 
   return (
-    <div className={`p-6 rounded-[2rem] border-l-8 shadow-lg transition-transform hover:scale-[1.02] ${styles[variant]}`}>
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <h3 className={`text-xs font-black uppercase tracking-widest mb-1 ${labelColors[variant]}`}>
+    /* Internal Card Responsiveness:
+       - Reduced p-6 to p-5 for mobile to save space
+       - Reduced rounded-[2rem] to rounded-3xl for better fit
+       - Adjusted text sizes with sm: modifiers
+    */
+    <div className={`p-5 md:p-6 rounded-3xl md:rounded-[2rem] border-l-[6px] md:border-l-8 shadow-lg transition-all duration-300 hover:scale-[1.02] ${styles[variant]}`}>
+      <div className="flex justify-between items-start mb-3 md:mb-4">
+        <div className="min-w-0"> {/* Prevents text overflow */}
+          <h3 className={`text-[10px] md:text-xs font-black uppercase tracking-widest mb-1 truncate ${labelColors[variant]}`}>
             {title}
           </h3>
-          <p className="text-4xl font-black">{value}</p>
+          <p className="text-3xl md:text-4xl font-black break-words leading-none">
+            {value}
+          </p>
         </div>
-        <span className="text-2xl bg-white/10 p-2 rounded-xl">{icon}</span>
+        <span className="text-xl md:text-2xl bg-white/10 p-2 rounded-xl shrink-0">
+          {icon}
+        </span>
       </div>
-      <div className={`text-[11px] font-bold ${variant === 'blue' || variant === 'slate' ? 'text-white/60' : 'text-slate-400'}`}>
+      <div className={`text-[10px] md:text-[11px] font-bold truncate ${variant === 'blue' || variant === 'slate' ? 'text-white/60' : 'text-slate-400'}`}>
         {subText}
       </div>
     </div>
