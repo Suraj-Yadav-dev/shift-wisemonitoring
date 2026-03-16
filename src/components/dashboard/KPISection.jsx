@@ -32,16 +32,22 @@ export default function KPISection() {
     });
 
     const totalAbsent = Math.max(totalAllotted - totalPresent, 0);
+    
+    // Efficiency: (Present / Allotted)
     const efficiency = totalAllotted > 0 ? ((totalPresent / totalAllotted) * 100).toFixed(1) : "0.0";
+    
+    // NEW: Shortfall Percentage (Absent / Allotted)
+    const shortfallPercentage = totalAllotted > 0 ? ((totalAbsent / totalAllotted) * 100).toFixed(1) : "0.0";
+    
     const gap = Math.max(totalReq - totalPresent, 0);
 
-    return { totalAllotted, totalPresent, totalAbsent, efficiency, totalReq, gap };
+    return { totalAllotted, totalPresent, totalAbsent, efficiency, shortfallPercentage, totalReq, gap };
   }, [selectedPlant, selectedMonth]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       
-      {/* KPI: TOTAL CAPACITY (BLUE THEME) */}
+      {/* KPI: TOTAL CAPACITY */}
       <KPICard 
         title="Total Capacity" 
         value={kpiStats.totalAllotted} 
@@ -50,25 +56,25 @@ export default function KPISection() {
         variant="blue" 
       />
 
-      {/* KPI: TOTAL PRESENT (GOLD THEME) */}
+      {/* KPI: TOTAL PRESENT */}
       <KPICard 
         title="Live Presence" 
         value={kpiStats.totalPresent} 
-        subText={`${kpiStats.efficiency}% Floor Efficiency`}
+        subText={`${kpiStats.efficiency}% Presence Rate`}
         icon="🛠️"
         variant="gold" 
       />
 
-      {/* KPI: MANPOWER GAP (ROSE THEME) */}
+      {/* KPI: MANPOWER SHORTFALL (Updated with Percentage) */}
       <KPICard 
         title="Shortfall" 
         value={kpiStats.totalAbsent} 
-        subText="Absent Personnel"
+        subText={`${kpiStats.shortfallPercentage}% Shortfall Rate`}
         icon="⚠️"
         variant="rose" 
       />
 
-      {/* KPI: TARGET VARIANCE (SLATE THEME) */}
+      {/* KPI: TARGET VARIANCE */}
       <KPICard 
         title="Production Gap" 
         value={kpiStats.gap} 
