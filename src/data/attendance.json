@@ -15,7 +15,7 @@
   {
     "plant": "VAPL SIKRI-2",
     "shifts": [
-      { "name": "SPL A", "attendance": [1, 1, 1], "allotted": 5 },
+      { "name": "SPL A", "attendance": [1, 1, 1,0,0,0], "allotted": 5 },
       { "name": "SPL B", "attendance": [], "allotted": 5 },
       { "name": "A", "attendance": [], "allotted": 0 },
       { "name": "B", "attendance": [], "allotted": 0 },
@@ -28,7 +28,7 @@
   {
     "plant": "SHANKAR FORGE",
     "shifts": [
-      { "name": "SPL A", "attendance": [1, 1, 1, 1, 1, 1, 1, 1,0,0,0], "allotted": 11 },
+      { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,1,0,0,0], "allotted": 11 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
       { "name": "A", "attendance": [], "allotted": 0 },
       { "name": "B", "attendance": [], "allotted": 0 },
@@ -123,7 +123,7 @@
   {
     "plant": "BHAGWATI TECHNO",
     "shifts": [
-      { "name": "SPL A", "attendance": [0,0,0,0,0,0,0,0,0,0,0,0], "allotted": 12 },
+      { "name": "SPL A", "attendance": [], "allotted": 12 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
       { "name": "A", "attendance": [], "allotted": 0 },
       { "name": "B", "attendance": [], "allotted": 0 },
@@ -194,7 +194,7 @@
       { "name": "B", "attendance": [], "allotted": 0 },
       { "name": "C", "attendance": [], "allotted": 0 },
       { "name": "G", "attendance": [], "allotted": 0 },
-      { "name": "S1", "attendance": [ 1, 1, 1, 1, 1, 1, 1,1,0], "allotted": 9 },
+      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,0], "allotted": 9 },
       { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
@@ -272,7 +272,7 @@
       { "name": "B", "attendance": [], "allotted": 0 },
       { "name": "C", "attendance": [], "allotted": 0 },
       { "name": "G", "attendance": [], "allotted": 0 },
-      { "name": "S1", "attendance": [1, 1], "allotted": 2 },
+      { "name": "S1", "attendance": [], "allotted": 2 },
       { "name": "S2", "attendance": [], "allotted": 0 }
     ]
   },
