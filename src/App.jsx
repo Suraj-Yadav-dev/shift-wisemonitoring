@@ -10,8 +10,7 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen">
           
-          {/* Navbar sits at the top of all routes */}
-          <Navbar />
+          
 
           <main className="flex-grow">
             <Routes>

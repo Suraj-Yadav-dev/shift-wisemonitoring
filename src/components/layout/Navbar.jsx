@@ -1,24 +1,30 @@
 import React, { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import requirementsData from "../../data/requirements.json";
-import attendanceData from "../../data/attendance.json";
 import kpLogo from "../../assets/kp.jpg";
 
-export default function Navbar() {
+// Accept liveData as a prop (Pass this from App.js or Dashboard.js)
+export default function Navbar({ liveData = [] }) {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const globalStats = useMemo(() => {
     let totalReq = 0;
     let totalPres = 0;
-    requirementsData.forEach((r) => { totalReq += r.totalRequirement || 0; });
-    attendanceData.forEach((plant) => {
-      plant.shifts?.forEach((shift) => {
-        totalPres += shift.attendance?.filter((a) => a === 1).length || 0;
-      });
+
+    // 1. Calculate Total Requirement from your static JSON
+    requirementsData.forEach((r) => { 
+      totalReq += r.totalRequirement || 0; 
     });
+
+    // 2. Calculate Live Presence from Google Sheet data
+    // We sum up the 'achievement' field for all entries currently in liveData
+    liveData.forEach((entry) => {
+      totalPres += Number(entry.achievement) || 0;
+    });
+
     return { totalReq, totalPres };
-  }, []);
+  }, [liveData]); // Recalculate whenever liveData updates
 
   return (
     <nav className="bg-[#0055A4] text-white shadow-2xl sticky top-0 z-[100] transition-all duration-300">
@@ -48,21 +54,20 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {/* Desktop Nav Links */}
             <div className="hidden lg:flex items-center gap-2">
               <NavLink to="/" label="Dashboard" active={location.pathname === "/"} />
             </div>
           </div>
 
-          {/* --- RIGHT SIDE: DATA TRACKER & PROFILE --- */}
+          {/* --- RIGHT SIDE: DATA TRACKER --- */}
           <div className="flex items-center gap-3 sm:gap-6">
             <div className="flex items-center bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl border border-white/20 px-3 py-1.5 sm:px-5 sm:py-2 gap-3 sm:gap-6">
               <div className="text-center border-r border-white/20 pr-3 sm:pr-6">
-                <p className="text-[7px] sm:text-[9px] font-black text-blue-200 uppercase tracking-widest leading-none mb-1">Target</p>
+                <p className="text-[7px] sm:text-[9px] font-black text-blue-200 uppercase tracking-widest leading-none mb-1">Total Target</p>
                 <p className="text-sm sm:text-xl font-black text-white leading-none">{globalStats.totalReq}</p>
               </div>
               <div className="text-center">
-                <p className="text-[7px] sm:text-[9px] font-black text-amber-300 uppercase tracking-widest leading-none mb-1">Live</p>
+                <p className="text-[7px] sm:text-[9px] font-black text-amber-300 uppercase tracking-widest leading-none mb-1">Live Present</p>
                 <p className="text-sm sm:text-xl font-black text-amber-400 leading-none">{globalStats.totalPres}</p>
               </div>
             </div>
@@ -86,7 +91,6 @@ export default function Navbar() {
               >
                 📊 Dashboard Summary
               </Link>
-              {/* Add more mobile links here */}
             </div>
           </div>
         )}

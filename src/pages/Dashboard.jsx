@@ -4,6 +4,7 @@ import { FilterProvider } from "../context/FilterContext";
 import KPISection from "../components/dashboard/KPISection";
 import AttendanceGrid from "../components/dashboard/AttendanceGrid";
 import DayNightMonitoring from "../components/dashboard/DayNightMonitoring"; 
+import Navbar from "../components/layout/Navbar"; // Added Navbar import
 
 import Lottie from "lottie-react";
 import gearAnimation from "../assets/Steampunkmechanism.json";
@@ -17,7 +18,16 @@ export default function Dashboard() {
 
   const fetchShiftData = async () => {
     try {
+      // Fetch from your Vercel API route
       const response = await fetch('/api/update');
+      
+      // Safety check: if Vercel sends HTML instead of JSON, catch it here
+      const contentType = response.headers.get("content-type");
+      if (!response.ok || (contentType && contentType.includes("text/html"))) {
+        console.error("API Error: Received HTML. Check if /api/update.js is in the root 'api' folder.");
+        return;
+      }
+
       const data = await response.json();
       
       if (!Array.isArray(data)) {
@@ -26,21 +36,22 @@ export default function Dashboard() {
       }
 
       setLiveData(data);
-      setLastSync(new Date().toLocaleTimeString());
+      setLastSync(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
       
       // --- LOGIC TO SPLIT DATA BY DATE ---
       const now = new Date();
-      const todayStr = now.toDateString(); // e.g., "Tue Mar 17 2026"
+      const todayStr = now.toDateString(); 
 
       const yesterday = new Date();
       yesterday.setDate(now.getDate() - 1);
       const yesterdayStr = yesterday.toDateString();
 
-      // Filter logic to isolate specific days
+      // Filter entries for today
       const todayEntries = data.filter(entry => 
         entry.timestamp && new Date(entry.timestamp).toDateString() === todayStr
       );
       
+      // Filter entries for yesterday (for comparison in KPIs)
       const yesterdayEntries = data.filter(entry => 
         entry.timestamp && new Date(entry.timestamp).toDateString() === yesterdayStr
       );
@@ -56,6 +67,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchShiftData();
+    // Refresh data every 5 minutes
     const interval = setInterval(fetchShiftData, 300000); 
     return () => clearInterval(interval);
   }, []);
@@ -63,6 +75,10 @@ export default function Dashboard() {
   return (
     <FilterProvider>
       <div className="min-h-screen bg-slate-100 text-slate-900 font-sans transition-all duration-300">
+        
+        {/* NAVBAR: Passing today's data for global counters */}
+        <Navbar liveData={stats.today} />
+
         <div className="max-w-[1600px] mx-auto p-3 sm:p-6 md:p-8 space-y-6 md:space-y-8">
           
           {/* HEADER */}
@@ -84,8 +100,8 @@ export default function Dashboard() {
                     </span>
                     {loading ? "Syncing..." : `Live as of ${lastSync}`}
                   </div>
-                  <div className="text-[10px] md:text-xs font-bold px-3 py-1 bg-slate-200 rounded-full text-slate-600">
-                    Yesterday: {stats.yesterday.length} entries
+                  <div className="text-[10px] md:text-xs font-bold px-3 py-1 bg-slate-200 rounded-full text-slate-600 uppercase tracking-widest">
+                    Yesterday: {stats.yesterday.length} Entries
                   </div>
                 </div>
               </div>
@@ -96,7 +112,7 @@ export default function Dashboard() {
                 <Lottie animationData={gearAnimation} loop={true} />
               </div>
               <div className="border-l-2 border-slate-200 pl-6">
-                <p className="text-[10px] font-black text-slate-400 leading-tight uppercase tracking-widest">
+                <p className="text-[10px] font-black text-slate-400 leading-tight uppercase tracking-widest text-left">
                   System 4.0 <br /> 
                   <span className="text-[#0055A4] text-xs">Analytics Mode</span>
                 </p>
@@ -104,34 +120,36 @@ export default function Dashboard() {
             </div>
           </header>
 
-          <section className="sticky top-[75px] md:top-24 z-50"> 
+          {/* FILTER BAR */}
+          <section className="sticky top-[85px] z-50"> 
             <FilterBar />
           </section>
 
-          {/* KPI SECTION: Passing only today's entries for the big numbers */}
+          {/* KPI SECTION: Passing filtered data for precise daily metrics */}
           <KPISection 
             liveData={stats.today} 
             yesterdayData={stats.yesterday} 
           />
 
-          {/* MONITORING: Focusing on today's shift performance */}
+          {/* MONITORING: Shift-wise analysis for today */}
           <div className="bg-white/30 md:bg-white/50 rounded-2xl md:rounded-[3rem] p-1 md:p-2">
              <DayNightMonitoring liveData={stats.today} />
           </div>
 
-          {/* DETAILED ROSTER: Showing today's logs by default */}
+          {/* ATTENDANCE GRID: Current day roster */}
           <div className="pt-6 md:pt-12">
             <div className="flex items-center gap-4 mb-6 md:mb-8">
               <h2 className="text-lg md:text-xl font-black text-slate-800 uppercase tracking-widest">
-                Today's Attendance Log ({new Date().toLocaleDateString()})
+                Attendance Log: {new Date().toLocaleDateString('en-GB')}
               </h2>
               <div className="h-[2px] flex-grow bg-slate-200 rounded-full"></div>
             </div>
             <AttendanceGrid liveData={stats.today} />
           </div>
 
+          {/* FOOTER */}
           <footer className="text-center py-6 md:py-10 opacity-30 text-[8px] font-bold uppercase tracking-[0.3em]">
-            © 2026 KP Reliable Technique India Pvt. Ltd.
+            © 2026 KP Reliable Technique India Pvt. Ltd. | Data Analyst Portal
           </footer>
         </div>
       </div>
