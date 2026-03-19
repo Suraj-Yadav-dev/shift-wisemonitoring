@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import requirementsData from "../../data/requirements.json";
 import kpLogo from "../../assets/kp.jpg";
 
-// Accept liveData as a prop (Pass this from App.js or Dashboard.js)
 export default function Navbar({ liveData = [] }) {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,26 +11,22 @@ export default function Navbar({ liveData = [] }) {
     let totalReq = 0;
     let totalPres = 0;
 
-    // 1. Calculate Total Requirement from your static JSON
-    requirementsData.forEach((r) => { 
-      totalReq += r.totalRequirement || 0; 
-    });
+    // 1. Static Requirements
+    requirementsData.forEach((r) => { totalReq += r.totalRequirement || 0; });
 
-    // 2. Calculate Live Presence from Google Sheet data
-    // We sum up the 'achievement' field for all entries currently in liveData
+    // 2. Dynamic presence based on the filtered data passed from Dashboard
     liveData.forEach((entry) => {
       totalPres += Number(entry.achievement) || 0;
     });
 
     return { totalReq, totalPres };
-  }, [liveData]); // Recalculate whenever liveData updates
+  }, [liveData]);
 
   return (
     <nav className="bg-[#0055A4] text-white shadow-2xl sticky top-0 z-[100] transition-all duration-300">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20">
           
-          {/* --- MOBILE MENU BUTTON --- */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
@@ -43,7 +38,6 @@ export default function Navbar({ liveData = [] }) {
             )}
           </button>
 
-          {/* --- LEFT SIDE: LOGO --- */}
           <div className="flex items-center gap-4 lg:gap-10">
             <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
               <div className="bg-white p-1 rounded-lg shadow-md group-hover:scale-105 transition-transform">
@@ -59,15 +53,14 @@ export default function Navbar({ liveData = [] }) {
             </div>
           </div>
 
-          {/* --- RIGHT SIDE: DATA TRACKER --- */}
           <div className="flex items-center gap-3 sm:gap-6">
             <div className="flex items-center bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl border border-white/20 px-3 py-1.5 sm:px-5 sm:py-2 gap-3 sm:gap-6">
               <div className="text-center border-r border-white/20 pr-3 sm:pr-6">
-                <p className="text-[7px] sm:text-[9px] font-black text-blue-200 uppercase tracking-widest leading-none mb-1">Total Target</p>
+                <p className="text-[7px] sm:text-[9px] font-black text-blue-200 uppercase tracking-widest leading-none mb-1">Target</p>
                 <p className="text-sm sm:text-xl font-black text-white leading-none">{globalStats.totalReq}</p>
               </div>
               <div className="text-center">
-                <p className="text-[7px] sm:text-[9px] font-black text-amber-300 uppercase tracking-widest leading-none mb-1">Live Present</p>
+                <p className="text-[7px] sm:text-[9px] font-black text-amber-300 uppercase tracking-widest leading-none mb-1">Live</p>
                 <p className="text-sm sm:text-xl font-black text-amber-400 leading-none">{globalStats.totalPres}</p>
               </div>
             </div>
@@ -78,7 +71,6 @@ export default function Navbar({ liveData = [] }) {
           </div>
         </div>
 
-        {/* --- MOBILE DROPDOWN MENU --- */}
         {isMenuOpen && (
           <div className="lg:hidden pb-6 pt-2 border-t border-white/10 animate-fadeIn">
             <div className="flex flex-col gap-2">

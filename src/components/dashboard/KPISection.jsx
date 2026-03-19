@@ -18,18 +18,14 @@ export default function KPISection({ liveData = [], yesterdayData = [] }) {
       }
     });
 
-    // 2. Helper function for consistent Filtering
     const filterEntry = (entry) => {
       const plantMatch = !selectedPlant || selectedPlant === "All" || entry.project === selectedPlant;
-      
       const entryDate = new Date(entry.timestamp);
       const entryMonth = entryDate.toLocaleString('default', { month: 'long' });
       const monthMatch = !selectedMonth || selectedMonth === "All" || entryMonth === selectedMonth;
-
       return plantMatch && monthMatch;
     };
 
-    // 3. Process Today's Live Data (Passed as liveData prop)
     liveData.forEach((entry) => {
       if (filterEntry(entry)) {
         totalAllotted += Number(entry.target) || 0;
@@ -37,31 +33,27 @@ export default function KPISection({ liveData = [], yesterdayData = [] }) {
       }
     });
 
-    // 4. Process Yesterday's Data for Trend Analysis
     yesterdayData.forEach((entry) => {
       if (filterEntry(entry)) {
         yesterdayPresent += Number(entry.achievement) || 0;
       }
     });
 
-    // 5. Calculations
+    // --- CALCULATIONS ---
     const totalAbsent = Math.max(totalAllotted - totalPresent, 0);
     const efficiency = totalAllotted > 0 ? ((totalPresent / totalAllotted) * 100).toFixed(1) : "0.0";
     const shortfallPercentage = totalAllotted > 0 ? ((totalAbsent / totalAllotted) * 100).toFixed(1) : "0.0";
-    const gap = Math.max(totalReq - totalPresent, 0);
     
-    // Trend: Difference between today and yesterday
+    // Gap Logic: Difference between required (master plan) and current actual
+    const gap = Math.max(totalReq - totalPresent, 0);
+    const gapPercentage = totalReq > 0 ? ((gap / totalReq) * 100).toFixed(1) : "0.0";
+    
     const trend = totalPresent - yesterdayPresent;
 
     return { 
-      totalAllotted, 
-      totalPresent, 
-      totalAbsent, 
-      efficiency, 
-      shortfallPercentage, 
-      totalReq, 
-      gap,
-      trend 
+      totalAllotted, totalPresent, totalAbsent, 
+      efficiency, shortfallPercentage, totalReq, 
+      gap, gapPercentage, trend 
     };
   }, [selectedPlant, selectedMonth, liveData, yesterdayData]);
 
@@ -95,7 +87,7 @@ export default function KPISection({ liveData = [], yesterdayData = [] }) {
       <KPICard 
         title="Production Gap" 
         value={kpiStats.gap} 
-        subText={`Vs. Overall Goal (${kpiStats.totalReq})`}
+        subText={`${kpiStats.gapPercentage}% Deficit vs Goal (${kpiStats.totalReq})`}
         icon="📊"
         variant="slate" 
       />
@@ -106,36 +98,43 @@ export default function KPISection({ liveData = [], yesterdayData = [] }) {
 
 function KPICard({ title, value, subText, icon, variant }) {
   const styles = {
-    blue: "bg-[#0055A4] text-white border-blue-700",
-    gold: "bg-white border-amber-400 text-slate-800",
-    rose: "bg-white border-rose-500 text-slate-800",
-    slate: "bg-slate-800 text-white border-slate-700"
+    blue: "bg-gradient-to-br from-[#0055A4] to-[#003d75] text-white border-blue-400/30",
+    gold: "bg-white text-slate-800 border-amber-400 shadow-amber-100",
+    rose: "bg-white text-slate-800 border-rose-500 shadow-rose-100",
+    slate: "bg-gradient-to-br from-slate-800 to-slate-900 text-white border-slate-600"
   };
 
-  const labelColors = {
-    blue: "text-blue-200",
-    gold: "text-slate-400",
-    rose: "text-slate-400",
+  const subStyles = {
+    blue: "text-blue-100/80",
+    gold: "text-slate-500",
+    rose: "text-slate-500",
     slate: "text-slate-400"
   };
 
   return (
-    <div className={`p-5 md:p-6 rounded-3xl md:rounded-[2.5rem] border-l-[6px] md:border-l-8 shadow-lg transition-all duration-300 hover:scale-[1.02] ${styles[variant]}`}>
-      <div className="flex justify-between items-start mb-3 md:mb-4">
-        <div className="min-w-0">
-          <h3 className={`text-[10px] md:text-xs font-black uppercase tracking-widest mb-1 truncate ${labelColors[variant]}`}>
+    <div className={`relative p-5 md:p-7 rounded-[2rem] border-b-4 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${styles[variant]}`}>
+      {/* Background Decorative Element */}
+      <div className="absolute top-0 right-0 p-4 opacity-10 text-4xl grayscale">
+        {icon}
+      </div>
+
+      <div className="relative z-10 flex flex-col justify-between h-full">
+        <div>
+          <h3 className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-current opacity-50"></span>
             {title}
           </h3>
-          <p className="text-3xl md:text-4xl font-black break-words leading-none">
-            {value}
-          </p>
+          <div className="flex items-baseline gap-2">
+            <p className="text-3xl md:text-5xl font-black tracking-tighter">
+              {value}
+            </p>
+            <span className="text-xs font-bold opacity-40 uppercase">Units</span>
+          </div>
         </div>
-        <span className="text-xl md:text-2xl bg-white/10 p-2 rounded-xl shrink-0">
-          {icon}
-        </span>
-      </div>
-      <div className={`text-[10px] md:text-[11px] font-bold truncate ${variant === 'blue' || variant === 'slate' ? 'text-white/60' : 'text-slate-400'}`}>
-        {subText}
+
+        <div className={`mt-4 pt-4 border-t border-current/10 text-[10px] md:text-xs font-bold italic ${subStyles[variant]}`}>
+          {subText}
+        </div>
       </div>
     </div>
   );
