@@ -128,7 +128,7 @@ function KPICard({ title, value, subText, icon, variant }) {
             <p className="text-3xl md:text-5xl font-black tracking-tighter">
               {value}
             </p>
-            <span className="text-xs font-bold opacity-40 uppercase">Units</span>
+            <span className="text-xs font-bold opacity-40 uppercase">Inspector</span>
           </div>
         </div>
 

@@ -303,6 +303,19 @@
     ]
   },
   {
+    "plant": "JR",
+    "shifts": [
+      { "name": "SPL A", "attendance": [], "allotted": 0 },
+      { "name": "SPL B", "attendance": [], "allotted": 0 },
+      { "name": "A", "attendance": [], "allotted": 0},
+      { "name": "B", "attendance": [], "allotted": 0 },
+      { "name": "C", "attendance": [], "allotted": 0 },
+      { "name": "G", "attendance": [], "allotted": 0 },
+      { "name": "S1", "attendance": [1,1,1,1,1,1,1,1,1,1,1], "allotted": 9 },
+      { "name": "S2", "attendance": [], "allotted": 0 }
+    ]
+  },
+  {
     "plant": "PANCHKULA STEELS",
     "shifts": [
       { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,0], "allotted": 8 },

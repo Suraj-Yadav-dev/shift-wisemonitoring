@@ -327,6 +327,20 @@
     ]
   },
   {
+    "plant": "JRG",
+    "totalRequirement": 4,
+    "shifts": [
+      { "name": "SPL A", "requirement": 0 },
+      { "name": "SPL B", "requirement": 0 },
+      { "name": "A", "requirement": 0},
+      { "name": "B", "requirement": 0},
+      { "name": "C", "requirement": 0 },
+      { "name": "G", "requirement": 4},
+      { "name": "S1", "requirement": 0 },
+      { "name": "S2", "requirement": 0 }
+    ]
+  },
+  {
     "plant": "PANCHKULA STEEL",
     "totalRequirement": 6,
     "shifts": [
