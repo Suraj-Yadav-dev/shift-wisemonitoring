@@ -48,8 +48,10 @@ export default function Navbar({ liveData = [] }) {
               </span>
             </Link>
 
+            {/* --- DESKTOP NAVIGATION LINKS --- */}
             <div className="hidden lg:flex items-center gap-2">
               <NavLink to="/" label="Dashboard" active={location.pathname === "/"} />
+              <NavLink to="/charts" label="Charts" active={location.pathname === "/charts"} />
             </div>
           </div>
 
@@ -71,6 +73,7 @@ export default function Navbar({ liveData = [] }) {
           </div>
         </div>
 
+        {/* --- MOBILE NAVIGATION LINKS --- */}
         {isMenuOpen && (
           <div className="lg:hidden pb-6 pt-2 border-t border-white/10 animate-fadeIn">
             <div className="flex flex-col gap-2">
@@ -82,6 +85,16 @@ export default function Navbar({ liveData = [] }) {
                 }`}
               >
                 📊 Dashboard Summary
+              </Link>
+              
+              <Link
+                to="/charts"
+                onClick={() => setIsMenuOpen(false)}
+                className={`px-4 py-3 rounded-xl font-bold transition-colors ${
+                  location.pathname === "/charts" ? "bg-amber-400 text-blue-900" : "hover:bg-white/10 text-white"
+                }`}
+              >
+                📈 Analytics & Charts
               </Link>
             </div>
           </div>
