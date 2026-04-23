@@ -1,6 +1,6 @@
 [
   {
-    "plant": "SDL SIKRI",
+    "plant": "SDL",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:00 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -13,7 +13,7 @@
     ]
   },
   {
-    "plant": "VAPL SIKRI-2",
+    "plant": "SDL",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "plant": "SHANKAR FORGE",
+    "plant": "SFPL",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -38,7 +38,7 @@
       { "name": "S2", "time": "6:00 PM - 6:00 AM" }
     ]
   },{
-    "plant": "RICO BAWAL",
+    "plant": "RICO",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -51,7 +51,7 @@
     ]
   },
   {
-    "plant": "SUNBEAM TAPUKHERA",
+    "plant": "SAPL BAWAL",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -64,7 +64,22 @@
     ]
   },
   {
-    "plant": "POLYPLASTIC-BHIWADI (RAJ)",
+    "plant": "PP BHIWADI",
+
+    "shifts": [
+      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
+      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
+      { "name": "A", "time": "6:00 AM - 2:30 PM" },
+      { "name": "B", "time": "2:30 PM - 11:00 PM" },
+      { "name": "C", "time": "11:00 PM - 6:00 AM" },
+      { "name": "G", "time": "9:30 AM - 6:00 PM" },
+      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
+      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
+    ]
+  },
+  
+  {
+    "plant": "VAPL DHATIR",
 
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
@@ -78,35 +93,7 @@
     ]
   },
   {
-    "plant": "BHUNIT PALWAL",
-
-    "shifts": [
-      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
-      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
-      { "name": "A", "time": "6:00 AM - 2:30 PM" },
-      { "name": "B", "time": "2:30 PM - 11:00 PM" },
-      { "name": "C", "time": "11:00 PM - 6:00 AM" },
-      { "name": "G", "time": "9:30 AM - 6:00 PM" },
-      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
-      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
-    ]
-  },
-  {
-    "plant": "VICTORA DHATIR (JD)",
-
-    "shifts": [
-      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
-      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
-      { "name": "A", "time": "6:00 AM - 2:30 PM" },
-      { "name": "B", "time": "2:30 PM - 11:00 PM" },
-      { "name": "C", "time": "11:00 PM - 6:00 AM" },
-      { "name": "G", "time": "9:30 AM - 6:00 PM" },
-      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
-      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
-    ]
-  },
-  {
-    "plant": "SKH MANESAR PLANT 2",
+    "plant": "SKH-2",
 
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
@@ -134,7 +121,7 @@
     ]
   },
   {
-    "plant": "MATJET",
+    "plant": "DHATIR TESLA",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -147,34 +134,7 @@
     ]
   },
   {
-    "plant": "CUTTING EDGE DHATIR",
-    "shifts": [
-      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
-      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
-      { "name": "A", "time": "6:00 AM - 2:30 PM" },
-      { "name": "B", "time": "2:30 PM - 11:00 PM" },
-      { "name": "C", "time": "11:00 PM - 6:00 AM" },
-      { "name": "G", "time": "9:30 AM - 6:00 PM" },
-      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
-      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
-    ]
-  },
-  {
-    "plant": "VICTORA BAWAL",
-
-    "shifts": [
-      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
-      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
-      { "name": "A", "time": "6:00 AM - 2:30 PM" },
-      { "name": "B", "time": "2:30 PM - 11:00 PM" },
-      { "name": "C", "time": "11:00 PM - 6:00 AM" },
-      { "name": "G", "time": "9:30 AM - 6:00 PM" },
-      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
-      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
-    ]
-  },
-  {
-    "plant": "BHAGWATI TECHNO",
+    "plant": "BHAGWATI",
 
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
@@ -229,21 +189,7 @@
     ]
   },
   {
-    "plant": "MT AUTOCRAFT ROHTAK",
-
-    "shifts": [
-      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
-      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
-      { "name": "A", "time": "6:00 AM - 2:30 PM" },
-      { "name": "B", "time": "2:30 PM - 11:00 PM" },
-      { "name": "C", "time": "11:00 PM - 6:00 AM" },
-      { "name": "G", "time": "9:30 AM - 6:00 PM" },
-      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
-      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
-    ]
-  },
-  {
-    "plant": "SUNBEAM BAWAL",
+    "plant": "MT AUTO ROHTAK",
 
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
@@ -270,34 +216,7 @@
       { "name": "S2", "time": "6:00 PM - 6:00 AM" }
     ]
   },
-  {
-    "plant": "POLYPLASTIC-TAMIL NAIDU",
-
-    "shifts": [
-      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
-      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
-      { "name": "A", "time": "6:00 AM - 2:30 PM" },
-      { "name": "B", "time": "2:30 PM - 11:00 PM" },
-      { "name": "C", "time": "11:00 PM - 6:00 AM" },
-      { "name": "G", "time": "9:30 AM - 6:00 PM" },
-      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
-      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
-    ]
-  },
-  {
-    "plant": "VAPL PRITHLA",
-
-    "shifts": [
-      { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
-      { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
-      { "name": "A", "time": "6:00 AM - 2:30 PM" },
-      { "name": "B", "time": "2:30 PM - 11:00 PM" },
-      { "name": "C", "time": "11:00 PM - 6:00 AM" },
-      { "name": "G", "time": "9:30 AM - 6:00 PM" },
-      { "name": "S1", "time": "6:00 AM - 6:00 PM" },
-      { "name": "S2", "time": "6:00 PM - 6:00 AM" }
-    ]
-  },
+  
   {
     "plant": "VAPL PATHREDI",
 
@@ -313,7 +232,7 @@
     ]
   },
   {
-    "plant": "VAPL DHATIR B.O.P",
+    "plant": "DHATIR BOP",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -327,7 +246,6 @@
   },
   {
     "plant": "VIBRO CAUSTIC",
-
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },
@@ -340,7 +258,7 @@
     ]
   },
   {
-    "plant": "NOIDA GLOBAL",
+    "plant": "GLOBAL NOIDA",
 
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
@@ -380,7 +298,7 @@
     ]
   },
   {
-    "plant": "PANCHKULA STEELS",
+    "plant": "PANCHKULA STEEL",
     "shifts": [
       { "name": "SPL A", "time": "8:30 AM - 7:30 PM" },
       { "name": "SPL B", "time": "8:30 AM - 6:30 PM" },

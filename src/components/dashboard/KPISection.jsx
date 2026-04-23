@@ -3,7 +3,8 @@ import { useFilter } from "../../context/FilterContext";
 import requirementsData from "../../data/requirements.json";
 
 export default function KPISection({ liveData = [], yesterdayData = [] }) {
-  const { selectedPlant, selectedMonth } = useFilter();
+  // 1. ADD selectedShift to your destructuring here
+  const { selectedPlant, selectedMonth, selectedShift } = useFilter();
 
   const kpiStats = useMemo(() => {
     let totalAllotted = 0;
@@ -23,7 +24,12 @@ export default function KPISection({ liveData = [], yesterdayData = [] }) {
       const entryDate = new Date(entry.timestamp);
       const entryMonth = entryDate.toLocaleString('default', { month: 'long' });
       const monthMatch = !selectedMonth || selectedMonth === "All" || entryMonth === selectedMonth;
-      return plantMatch && monthMatch;
+      
+      // 2. ADD shift filtering logic
+      const shiftMatch = !selectedShift || selectedShift === "All" || entry.shift === selectedShift;
+
+      // 3. Return true only if ALL conditions match
+      return plantMatch && monthMatch && shiftMatch;
     };
 
     liveData.forEach((entry) => {
@@ -55,8 +61,8 @@ export default function KPISection({ liveData = [], yesterdayData = [] }) {
       efficiency, shortfallPercentage, totalReq, 
       gap, gapPercentage, trend 
     };
-  }, [selectedPlant, selectedMonth, liveData, yesterdayData]);
-
+    // 4. ADD selectedShift to the useMemo dependency array
+  }, [selectedPlant, selectedMonth, selectedShift, liveData, yesterdayData]);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 px-2 md:px-0">
       

@@ -303,7 +303,7 @@
     ]
   },
   {
-    "plant": "JR",
+    "plant": "JRG",
     "shifts": [
       { "name": "SPL A", "attendance": [], "allotted": 0 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },
@@ -316,7 +316,7 @@
     ]
   },
   {
-    "plant": "PANCHKULA STEELS",
+    "plant": "PANCHKULA STEEL",
     "shifts": [
       { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,0], "allotted": 8 },
       { "name": "SPL B", "attendance": [], "allotted": 0 },

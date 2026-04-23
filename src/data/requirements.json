@@ -340,7 +340,7 @@
       { "name": "S2", "requirement": 0 }
     ]
   },
-  {
+  { 
     "plant": "PANCHKULA STEEL",
     "totalRequirement": 6,
     "shifts": [

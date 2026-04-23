@@ -7,33 +7,41 @@ const MORNING_KEYWORDS = ["SPL A", "A SHIFT", "G SHIFT", "S1 SHIFT"];
 const EVENING_KEYWORDS = ["B SHIFT", "C SHIFT", "S2 SHIFT", "SPL B"];
 
 export default function DayNightMonitoring({ liveData = [] }) {
-  const { selectedPlant, selectedMonth } = useFilter();
+  // 1. ADDED selectedShift to the destructured context
+  const { selectedPlant, selectedMonth, selectedShift } = useFilter();
 
   const stats = useMemo(() => {
     let morningPres = 0, eveningPres = 0;
     let morningReq = 0, eveningReq = 0;
     
-    // Store shift-specific totals
     const shiftDetails = {};
+
+    // Helper functions to check if a shift is Morning or Evening
+    const checkIsMorning = (name) => MORNING_KEYWORDS.some(k => name.toUpperCase().includes(k.replace(" SHIFT", "")));
+    const checkIsEvening = (name) => EVENING_KEYWORDS.some(k => name.toUpperCase().includes(k.replace(" SHIFT", "")));
 
     // 1. Initialize requirement tracking from requirements.json
     requirementsData.forEach((plant) => {
       if (selectedPlant && selectedPlant !== "All" && plant.plant !== selectedPlant) return;
       
       plant.shifts?.forEach((s) => {
+        // Filter requirements by selected shift
+        const shiftNameUpper = s.name.toUpperCase();
+        if (selectedShift && selectedShift !== "All" && !shiftNameUpper.includes(selectedShift.replace(" SHIFT", "").toUpperCase())) {
+          return;
+        }
+
         if (!shiftDetails[s.name]) {
           shiftDetails[s.name] = { name: s.name, req: 0, pres: 0 };
         }
         shiftDetails[s.name].req += s.requirement || 0;
 
-        // Grouping requirements into Morning/Night totals
-        const isMorning = MORNING_KEYWORDS.some(k => s.name.toUpperCase().includes(k.replace(" SHIFT", "")));
-        if (isMorning) morningReq += s.requirement || 0;
+        if (checkIsMorning(s.name)) morningReq += s.requirement || 0;
         else eveningReq += s.requirement || 0;
       });
     });
 
-    // 2. Process LIVE Google Sheet data using Partial String Matching
+    // 2. Process LIVE Google Sheet data
     liveData.forEach((entry) => {
       const plantMatch = !selectedPlant || selectedPlant === "All" || entry.project === selectedPlant;
       
@@ -41,22 +49,29 @@ export default function DayNightMonitoring({ liveData = [] }) {
       const entryMonth = entryDate.toLocaleString('default', { month: 'long' });
       const monthMatch = !selectedMonth || selectedMonth === "All" || entryMonth === selectedMonth;
 
-      if (plantMatch && monthMatch) {
-        const rawShiftName = (entry.shift || "").toUpperCase();
+      // Filter live data by selected shift
+      const rawShiftName = (entry.shift || "").toUpperCase().trim();
+      const shiftMatch = !selectedShift || selectedShift === "All" || rawShiftName.includes(selectedShift.replace(" SHIFT", "").toUpperCase());
+
+      if (plantMatch && monthMatch && shiftMatch) {
         const presentCount = Number(entry.achievement) || 0;
 
-        // Find which short name from requirements matches the long string in the sheet
-        const matchedKey = Object.keys(shiftDetails).find(key => 
-          rawShiftName.includes(key.toUpperCase())
-        );
+        // Find matching key OR create a new one dynamically if missing from requirements.json
+        let matchedKey = Object.keys(shiftDetails).find(key => rawShiftName.includes(key.toUpperCase()));
 
-        if (matchedKey) {
-          shiftDetails[matchedKey].pres += presentCount;
-          
-          // Categorize for the Sun/Moon panels
-          const isMorning = MORNING_KEYWORDS.some(k => rawShiftName.includes(k.toUpperCase()));
-          if (isMorning) morningPres += presentCount;
-          else eveningPres += presentCount;
+        if (!matchedKey) {
+          matchedKey = rawShiftName || "UNKNOWN";
+          shiftDetails[matchedKey] = { name: matchedKey, req: 0, pres: 0 };
+        }
+
+        shiftDetails[matchedKey].pres += presentCount;
+        
+        // Categorize for the Sun/Moon panels
+        if (checkIsMorning(rawShiftName)) {
+          morningPres += presentCount;
+        } else {
+          // Defaulting to evening for anything not strictly "morning" to ensure no data is lost
+          eveningPres += presentCount;
         }
       }
     });
@@ -76,13 +91,14 @@ export default function DayNightMonitoring({ liveData = [] }) {
       morning: calc(morningReq, morningPres),
       evening: calc(eveningReq, eveningPres),
       morningDetails: Object.values(shiftDetails)
-        .filter(s => MORNING_KEYWORDS.some(k => s.name.toUpperCase().includes(k.replace(" SHIFT", ""))))
+        .filter(s => checkIsMorning(s.name))
         .map(s => ({ ...s, ...calc(s.req, s.pres) })),
       eveningDetails: Object.values(shiftDetails)
-        .filter(s => EVENING_KEYWORDS.some(k => s.name.toUpperCase().includes(k.replace(" SHIFT", ""))))
+        .filter(s => !checkIsMorning(s.name)) // Uses negative check to guarantee all shifts get displayed
         .map(s => ({ ...s, ...calc(s.req, s.pres) })),
     };
-  }, [selectedPlant, selectedMonth, liveData]);
+  // 3. ADDED selectedShift to dependency array
+  }, [selectedPlant, selectedMonth, selectedShift, liveData]);
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 py-6">
