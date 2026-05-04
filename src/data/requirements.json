@@ -1,6 +1,6 @@
 [
   {
-    "plant": "SDL SIKRI",
+    "plant": "SDL ",
    "totalRequirement":  40,
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
@@ -15,7 +15,7 @@
     
   },
   {
-    "plant": "VAPL SIKRI-2",
+    "plant": "SDL",
     "totalRequirement": 10,
     "shifts": [
       { "name": "SPL A", "requirement":  0},

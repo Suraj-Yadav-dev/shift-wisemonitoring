@@ -11,13 +11,16 @@ import gearAnimation from "../assets/Steampunkmechanism.json";
 import kpLogo from "../assets/kp.jpg";
 
 export default function Dashboard() {
-  const [allData, setAllData] = useState([]); // Stores everything from Google
+  const [allData, setAllData] = useState([]); // Stores everything from API
   const [loading, setLoading] = useState(true);
   const [viewDate, setViewDate] = useState(new Date().toISOString().split('T')[0]); // YYYY-MM-DD
   const [stats, setStats] = useState({ current: [], comparison: [] });
   const [lastSync, setLastSync] = useState("");
 
-  // Logic to filter data whenever allData or viewDate changes
+  /**
+   * Logic to filter data whenever allData or viewDate changes.
+   * Separates "Today's" data from "Yesterday's" data for trend analysis.
+   */
   const applyFilters = useCallback((data, selectedDate) => {
     const target = new Date(selectedDate);
     const targetStr = target.toDateString();
@@ -37,6 +40,9 @@ export default function Dashboard() {
     setStats({ current: currentEntries, comparison: comparisonEntries });
   }, []);
 
+  /**
+   * Fetches data from the backend/Google Sheets API
+   */
   const fetchShiftData = async () => {
     try {
       const response = await fetch('/api/update');
@@ -54,13 +60,14 @@ export default function Dashboard() {
     }
   };
 
+  // Initial fetch and 5-minute auto-refresh
   useEffect(() => {
     fetchShiftData();
     const interval = setInterval(fetchShiftData, 300000); 
     return () => clearInterval(interval);
   }, []);
 
-  // Re-filter when user changes the date
+  // Re-filter when user changes the date or data updates
   useEffect(() => {
     if (allData.length > 0) {
       applyFilters(allData, viewDate);
@@ -71,12 +78,12 @@ export default function Dashboard() {
     <FilterProvider>
       <div className="min-h-screen bg-slate-100 text-slate-900 font-sans transition-all duration-300">
         
-        {/* Navbar receives data based on the selected date */}
+        {/* Navbar */}
         <Navbar liveData={stats.current} />
 
         <div className="max-w-[1600px] mx-auto p-3 sm:p-6 md:p-8 space-y-6 md:space-y-8">
           
-          {/* HEADER */}
+          {/* HEADER CARD */}
           <header className="bg-white rounded-3xl md:rounded-[2.5rem] shadow-xl p-5 md:p-10 flex flex-col lg:flex-row items-center justify-between border-b-[6px] md:border-b-[10px] border-[#0055A4] gap-6">
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
               <div className="p-3 bg-white rounded-2xl shadow-lg border border-slate-100 shrink-0">
@@ -102,6 +109,7 @@ export default function Dashboard() {
               </div>
             </div>
 
+            {/* Industrial Aesthetic Decor */}
             <div className="hidden lg:flex items-center gap-6 bg-slate-50 px-8 py-3 rounded-[2rem] border border-slate-200 shadow-inner">
               <div className="w-24 h-24 transform scale-110">
                 <Lottie animationData={gearAnimation} loop={true} />
@@ -115,10 +123,10 @@ export default function Dashboard() {
             </div>
           </header>
 
-          {/* DATE & YEAR SELECTOR BAR */}
+          {/* DATE SELECTOR BAR */}
           <div className="sticky top-[85px] z-[60] flex flex-wrap items-center justify-between bg-white/80 backdrop-blur-md p-4 rounded-3xl shadow-lg border-l-8 border-amber-400 gap-4">
              <div className="flex items-center gap-3">
-                <div className="bg-amber-100 p-2 rounded-xl">📅</div>
+                <div className="bg-amber-100 p-2 rounded-xl text-lg">📅</div>
                 <span className="font-black uppercase text-slate-700 tracking-tight text-sm sm:text-base">History Viewer</span>
              </div>
              <div className="flex items-center gap-2">
@@ -126,42 +134,47 @@ export default function Dashboard() {
                   type="date" 
                   value={viewDate}
                   onChange={(e) => setViewDate(e.target.value)}
-                  className="bg-slate-100 border-none rounded-xl px-4 py-2 font-black text-[#0055A4] focus:ring-2 focus:ring-amber-400 outline-none transition-all"
+                  className="bg-slate-100 border-none rounded-xl px-4 py-2 font-black text-[#0055A4] focus:ring-2 focus:ring-amber-400 outline-none transition-all cursor-pointer"
                 />
                 <button 
                   onClick={() => setViewDate(new Date().toISOString().split('T')[0])}
-                  className="bg-amber-400 text-blue-900 px-4 py-2 rounded-xl font-black text-xs uppercase hover:bg-amber-500 transition-colors"
+                  className="bg-amber-400 text-blue-900 px-4 py-2 rounded-xl font-black text-xs uppercase hover:bg-amber-500 transition-colors shadow-md"
                 >
                   Reset
                 </button>
              </div>
           </div>
 
+          {/* GLOBAL FILTERS */}
           <section className="z-50"> 
             <FilterBar />
           </section>
 
+          {/* KPI CARDS & REQUIREMENTS GRID */}
           <KPISection 
             liveData={stats.current} 
             yesterdayData={stats.comparison} 
           />
 
-          <div className="bg-white/30 md:bg-white/50 rounded-2xl md:rounded-[3rem] p-1 md:p-2">
+          {/* DAY/NIGHT SHIFT MONITORING */}
+          <div className="bg-white/30 md:bg-white/50 rounded-2xl md:rounded-[3rem] p-1 md:p-2 border border-white/50 shadow-sm">
              <DayNightMonitoring liveData={stats.current} />
           </div>
 
+          {/* ATTENDANCE DATA TABLE */}
           <div className="pt-6 md:pt-12">
             <div className="flex items-center gap-4 mb-6 md:mb-8">
               <h2 className="text-lg md:text-xl font-black text-slate-800 uppercase tracking-widest">
                 Attendance Log: {new Date(viewDate).toLocaleDateString('en-GB')}
               </h2>
-              <div className="h-[2px] flex-grow bg-slate-200 rounded-full"></div>
+              <div className="h-[1px] flex-grow bg-slate-300"></div>
             </div>
             <AttendanceGrid liveData={stats.current} />
           </div>
 
-          <footer className="text-center py-6 md:py-10 opacity-30 text-[8px] font-bold uppercase tracking-[0.3em]">
-            © 2026 KP Reliable Technique India Pvt. Ltd. | History Mode Enabled
+          {/* FOOTER */}
+          <footer className="text-center py-6 md:py-10 opacity-40 text-[9px] font-bold uppercase tracking-[0.4em] text-slate-500">
+            © 2026 KP Reliable Technique India Pvt. Ltd. | Secure Infrastructure
           </footer>
         </div>
       </div>

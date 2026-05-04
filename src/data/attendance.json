@@ -1,6 +1,6 @@
 [
   {
-    "plant": "SDL SIKRI",
+    "plant": "SDL ",
     "shifts": [
       { "name": "SPL A", "attendance": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], "allotted": 35 },
       { "name": "SPL B", "attendance": [], "allotted": 35},
