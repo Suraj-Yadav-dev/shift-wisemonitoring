@@ -113,7 +113,7 @@ function ProjectDropdown({ item, liveData }) {
             <p className="text-[10px] font-black text-slate-400 uppercase">Live Presence</p>
             <p className="text-sm font-black text-emerald-600">{liveStats} Present</p>
           </div>
-          <span className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>▼</span>
+          <span className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`}></span>
         </div>
       </button>
 

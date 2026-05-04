@@ -1,346 +1,129 @@
 [
   {
     "plant": "SDL ",
-   "totalRequirement":  40,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0},
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+   "totalRequirement":  40
     
   },
   {
     "plant": "SDL",
-    "totalRequirement": 10,
-    "shifts": [
-      { "name": "SPL A", "requirement":  0},
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 10
+    
   },
   {
     "plant": "BHAGWATI",
-    "totalRequirement": 10,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0},
-      { "name": "SPL B", "requirement": 0},
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 10
+    
   },
   {
     "plant": "SFPL",
-    "totalRequirement": 12,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0},
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 12
+    
   },
   {
     "plant": "RICO ",
-    "totalRequirement": 15,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0},
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0},
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 15
+    
   },
   
   {
     "plant": "PP BHIWADI ",
-    "totalRequirement": 1,
-    "shifts": [
-      { "name": "SPL A", "requirement":  0},
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0},
-      { "name": "S1", "requirement": 0},
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 1
+    
   },
 
   {
     "plant": "VAPL DHATIR",
-    "totalRequirement": 29,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0},
-      { "name": "SPL B", "requirement": 0},
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 29
+
   },
   {
     "plant": "SKH-2",
-    "totalRequirement": 18,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0},
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement":  0},
-      { "name": "B", "requirement": 0},
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0},
-      { "name": "S2", "requirement": 0}
-    ]
+    "totalRequirement": 18
+    
   },
   {
     "plant": "VAPL BAWAL-1",
-    "totalRequirement": 12,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 12
+    
   },
   
   {
     "plant": "DHATIR TESLA",
-    "totalRequirement":3,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0},
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement":3
+    
   },
 
   {
     "plant": "NIROTECH",
-    "totalRequirement": 26,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 26
+    
   },
   {
     "plant": "SKH-1",
-    "totalRequirement": 4,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement":  0},
-      { "name": "B", "requirement":  0},
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement":  0},
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 4
+    
   },
   {
     "plant": "SATA VIKAS",
-    "totalRequirement": 2,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 2
+
   },
   {
     "plant": "MT AUTO ROHTAK",
-    "totalRequirement": 4,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0},
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 4
+    
   },
   {
-    "plant": "SUNBEAM BAWAL",
-    "totalRequirement": 10,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "plant": "SAPL BAWAL",
+    "totalRequirement": 10
+    
   },
   {
     "plant": "KML",
-    "totalRequirement": 31,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0},
-      { "name": "B", "requirement": 0},
-      { "name": "C", "requirement": 0},
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement":0},
-      { "name": "S2", "requirement": 0}
-    ]
+    "totalRequirement": 31
+    
   },
   
 
   {
     "plant": "VAPL PATHREDI",
-    "totalRequirement": 60,
-    "shifts": [
-      { "name": "SPL A", "requirement":0},
-      { "name": "SPL B", "requirement": 0},
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement":0 },
-      { "name": "S2", "requirement":0}
-    ]
+    "totalRequirement": 60
+
   },
   {
     "plant": "DHATIR BOP",
-    "totalRequirement": 14,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0},
-      { "name": "SPL B", "requirement":  0},
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 14
+    
   },
   {
     "plant": "VIBRO CAUSTIC",
-    "totalRequirement": 1,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 1
+    
   },
   {
     "plant": "GLOBAL NOIDA",
-    "totalRequirement": 17,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 17
+    
   },
   {
     "plant": "SKH-4",
-    "totalRequirement": 18,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0},
-      { "name": "B", "requirement": 0},
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0},
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 18
+    
   },
   {
     "plant": "JRG",
-    "totalRequirement": 8,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0},
-      { "name": "B", "requirement": 0},
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0},
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 8
+    
   },
   {
     "plant": "SEBROS",
-    "totalRequirement": 6,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0},
-      { "name": "B", "requirement": 0},
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0},
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 6
+
   },
   { 
     "plant": "PANCHKULA STEEL",
-    "totalRequirement": 5,
-    "shifts": [
-      { "name": "SPL A", "requirement": 0 },
-      { "name": "SPL B", "requirement": 0 },
-      { "name": "A", "requirement": 0 },
-      { "name": "B", "requirement": 0 },
-      { "name": "C", "requirement": 0 },
-      { "name": "G", "requirement": 0 },
-      { "name": "S1", "requirement": 0 },
-      { "name": "S2", "requirement": 0 }
-    ]
+    "totalRequirement": 5
+    
   }
   
 ]

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "../components/layout/Navbar"; 
-// Notice we no longer import FilterProvider here to prevent the router crash
 import { useFilter } from "../context/FilterContext";
 import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, ComposedChart 
+  Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, ComposedChart 
 } from "recharts";
 
 function ChartContent() {
@@ -32,10 +31,17 @@ function ChartContent() {
     if (!liveData || liveData.length === 0) return [];
 
     const groupedData = {};
+    // Define our start boundary: 1st May 2026
+    const startDate = new Date("2026-05-01T00:00:00");
 
     liveData.forEach((entry) => {
-      const plantMatch = !selectedPlant || selectedPlant === "All" || entry.project === selectedPlant;
       const entryDate = new Date(entry.timestamp);
+
+      // --- NEW FILTER LOGIC ---
+      // Only process data that is on or after 1st May 2026
+      if (entryDate < startDate) return;
+
+      const plantMatch = !selectedPlant || selectedPlant === "All" || entry.project === selectedPlant;
       const entryMonth = entryDate.toLocaleString('default', { month: 'long' });
       const monthMatch = !selectedMonth || selectedMonth === "All" || entryMonth === selectedMonth;
       const rawShiftName = (entry.shift || "").toUpperCase().trim();
@@ -59,7 +65,6 @@ function ChartContent() {
       }
     });
 
-    // Calculate Absolute Shortfall AND Shortfall Percentage
     return Object.values(groupedData).map(day => {
       const shortfallCount = Math.max(day.target - day.achievement, 0);
       const shortfallPercentage = day.target > 0 ? ((shortfallCount / day.target) * 100).toFixed(1) : 0;
@@ -67,7 +72,7 @@ function ChartContent() {
       return {
         ...day,
         shortfall: shortfallCount,
-        shortfallPercentage: parseFloat(shortfallPercentage) // Converted back to a number for the chart
+        shortfallPercentage: parseFloat(shortfallPercentage)
       };
     }).sort((a, b) => a.timestamp - b.timestamp);
 
@@ -83,14 +88,14 @@ function ChartContent() {
             Shortfall Analytics
           </h1>
           <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mt-1">
-            Tracking Daily Inspector Deficits
+            Tracking Deficits from 01 May 2026
           </p>
         </div>
         
         <div className="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-4 border-slate-200">
           <h3 className="text-lg font-black text-slate-800 mb-6 flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></span>
-            DOWNFALL REPRESENTATION (DEFICIT TREND)
+            DOWNFALL REPRESENTATION (MAY 2026 TREND)
           </h3>
 
           {isLoading ? (
@@ -99,7 +104,7 @@ function ChartContent() {
             </div>
           ) : chartData.length === 0 ? (
             <div className="h-[400px] flex items-center justify-center">
-              <p className="text-slate-400 font-bold uppercase tracking-widest">No data available for selected filters</p>
+              <p className="text-slate-400 font-bold uppercase tracking-widest">No data available from May 1st onwards</p>
             </div>
           ) : (
             <div className="h-[400px] w-full">
@@ -114,7 +119,6 @@ function ChartContent() {
                     axisLine={{ stroke: '#cbd5e1' }}
                   />
                   
-                  {/* LEFT Y-AXIS (For Target and Absolute Shortfall numbers) */}
                   <YAxis 
                     yAxisId="left"
                     tick={{ fill: '#64748b', fontSize: 12, fontWeight: 'bold' }}
@@ -122,7 +126,6 @@ function ChartContent() {
                     axisLine={false}
                   />
 
-                  {/* RIGHT Y-AXIS (For the Percentage Trend) */}
                   <YAxis 
                     yAxisId="right"
                     orientation="right"
@@ -132,7 +135,6 @@ function ChartContent() {
                     axisLine={false}
                   />
                   
-                  {/* Custom Tooltip ensures percentages show a "%" sign on hover */}
                   <Tooltip 
                     contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)', fontWeight: 'bold' }}
                     labelStyle={{ color: '#0f172a', fontWeight: '900', textTransform: 'uppercase' }}
@@ -144,7 +146,6 @@ function ChartContent() {
                   
                   <Legend wrapperStyle={{ paddingTop: '20px', fontWeight: 'bold', fontSize: '12px' }} />
 
-                  {/* Absolute Numbers mapped to the Left Axis */}
                   <Area 
                     yAxisId="left"
                     type="monotone" 
@@ -164,7 +165,6 @@ function ChartContent() {
                     dot={false}
                   />
                   
-                  {/* Percentage mapped to the Right Axis */}
                   <Line 
                     yAxisId="right"
                     type="monotone" 
@@ -185,7 +185,6 @@ function ChartContent() {
   );
 }
 
-// Ensure NO <FilterProvider> is wrapped here so App.jsx's global provider handles it!
 export default function ChartsPage() {
   return <ChartContent />;
 }
