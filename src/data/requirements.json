@@ -29,7 +29,7 @@
     ]
   },
   {
-    "plant": "Bhgwati",
+    "plant": "BHAGWATI",
     "totalRequirement": 10,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
@@ -43,7 +43,7 @@
     ]
   },
   {
-    "plant": "SHANKAR FORGE",
+    "plant": "SFPL",
     "totalRequirement": 12,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
@@ -57,7 +57,7 @@
     ]
   },
   {
-    "plant": "RICO BAWAL",
+    "plant": "RICO ",
     "totalRequirement": 15,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
@@ -72,7 +72,7 @@
   },
   
   {
-    "plant": "POLYPLASTIC-BHIWADI",
+    "plant": "PP BHIWADI ",
     "totalRequirement": 1,
     "shifts": [
       { "name": "SPL A", "requirement":  0},
@@ -87,7 +87,7 @@
   },
 
   {
-    "plant": "VICTORA DHATIR",
+    "plant": "VAPL DHATIR",
     "totalRequirement": 29,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
@@ -101,7 +101,7 @@
     ]
   },
   {
-    "plant": "SKH MANESER PLANT 2",
+    "plant": "SKH-2",
     "totalRequirement": 18,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
@@ -130,7 +130,7 @@
   },
   
   {
-    "plant": "CUTTING EDGE DHATIR",
+    "plant": "DHATIR TESLA",
     "totalRequirement":3,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
@@ -187,7 +187,7 @@
     ]
   },
   {
-    "plant": "MT AUTOCRAFT ROHTAK",
+    "plant": "MT AUTO ROHTAK",
     "totalRequirement": 4,
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
@@ -245,7 +245,7 @@
     ]
   },
   {
-    "plant": "VAPL DHATIR B.O.P",
+    "plant": "DHATIR BOP",
     "totalRequirement": 14,
     "shifts": [
       { "name": "SPL A", "requirement": 0},
@@ -273,7 +273,7 @@
     ]
   },
   {
-    "plant": "NOIDA GLOBAL",
+    "plant": "GLOBAL NOIDA",
     "totalRequirement": 17,
     "shifts": [
       { "name": "SPL A", "requirement": 0 },
